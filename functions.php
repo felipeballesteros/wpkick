@@ -1,5 +1,4 @@
 <?php
-
 if ( !function_exists( 'optionsframework_init' ) ) {
 
 /*-----------------------------------------------------------------------------------*/
@@ -47,6 +46,7 @@ jQuery(document).ready(function() {
 <?php
 }
 
+
 /*-----------------------------------------------------------------------------------*/
 /* Add Theme Shortcodes
 /*-----------------------------------------------------------------------------------*/
@@ -63,6 +63,7 @@ add_filter('show_admin_bar', '__return_false');
 /* Add Multiple Thumbnail Support
 /*-----------------------------------------------------------------------------------*/
 include("multi-post-thumbnails.php");
+
 
 /*-----------------------------------------------------------------------------------*/
 /* Register Widget Sidebars
@@ -235,7 +236,7 @@ function ag_prettyphoto_styles() {
 add_action('wp_print_styles', 'ag_prettyphoto_styles');
 
 function themename_enqueue_css() {
-wp_register_style('options', get_template_directory_uri() . '/css/custom.css', 'style');
+wp_register_style('options', get_stylesheet_directory_uri() . '/css/custom.css', 'style');
 wp_enqueue_style( 'options');
 }
 add_action('wp_print_styles', 'themename_enqueue_css');
@@ -412,7 +413,7 @@ if ( $thumbnum = of_get_option('of_thumbnail_number') ) { $thumbnum = ($thumbnum
 			array( 
 				'label' => 'Slide ' . $counter1, 
 				'id' => $counter1 . '-slide', 
-				'post_type' => 'portfolio' 
+				'post_type' => 'sony-playstation' 
 			)); $counter1++;
 	}
 }
@@ -527,7 +528,7 @@ function the_post_thumbnail_caption() {
   $thumb_id = get_post_thumbnail_id($post->ID);
 
   $args = array(
-	'post_type' => 'portfolio',
+	'post_type' => 'sony-playstation',
 	'post_status' => null,
 	'post_parent' => $post->ID,
 	'include'  => $thumb_id
@@ -698,24 +699,24 @@ function show_social_icons($permalink,$title){
 add_action( 'init', 'create_portfolio_post_types' );
 
 function create_portfolio_post_types() {
-	register_post_type( 'portfolio',
+	register_post_type( 'sony-playstation',
 		array(
 			  'labels' => array(
-			  'name' => __( 'Portfolio', 'framework'),
-			  'singular_name' => __( 'Portfolio Item', 'framework'),
+			  'name' => __( 'Sony', 'framework'),
+			  'singular_name' => __( 'Sony Item', 'framework'),
 			  'add_new' => __( 'Add New', 'framework' ),
-		   	  'add_new_item' => __( 'Add New Portfolio Item', 'framework'),
+		   	  'add_new_item' => __( 'Add New Sony Item', 'framework'),
 			  'edit' => __( 'Edit', 'framework' ),
-	  		  'edit_item' => __( 'Edit Portfolio Item', 'framework'),
-	          'new_item' => __( 'New Portfolio Item', 'framework'),
-			  'view' => __( 'View Portfolio', 'framework'),
-			  'view_item' => __( 'View Portfolio Item', 'framework'),
-			  'search_items' => __( 'Search Portfolio Items', 'framework'),
-	  		  'not_found' => __( 'No Portfolios found', 'framework'),
-	  		  'not_found_in_trash' => __( 'No Portfolio Items found in Trash', 'framework'),
-			  'parent' => __( 'Parent Portfolio', 'framework'),
+	  		  'edit_item' => __( 'Edit Sony Item', 'framework'),
+	          'new_item' => __( 'New Sony Item', 'framework'),
+			  'view' => __( 'View Sony', 'framework'),
+			  'view_item' => __( 'View Sony Item', 'framework'),
+			  'search_items' => __( 'Search Sony Items', 'framework'),
+	  		  'not_found' => __( 'No Sony items found', 'framework'),
+	  		  'not_found_in_trash' => __( 'No Sony Items found in Trash', 'framework'),
+			  'parent' => __( 'Parent Sony', 'framework'),
 			),
-			'menu_icon' => get_template_directory_uri() . '/admin/images/photos.png',
+			'menu_icon' => get_stylesheet_directory_uri() . '/admin/images/playstation.png',
 			'public' => true,
 			'supports' => array( 
 				'title', 
@@ -727,8 +728,8 @@ function create_portfolio_post_types() {
 }
 function custom_icon() {
 	   echo '<style type="text/css">
-		  #icon-edit.icon32.icon32-posts-portfolio {
-			background: url('. get_template_directory_uri() . '/admin/images/photos-large.png) no-repeat; 
+		  #icon-edit.icon32.icon32-posts-sony-playstation {
+			background: url('. get_stylesheet_directory_uri() . '/admin/images/playstation-large.png) no-repeat; 
 		  }
 		 </style>';
 }
@@ -743,20 +744,20 @@ function ag_create_taxonomies()
 {
   // Add new taxonomy, make it hierarchical (like categories)
   $labels = array(
-    'name' => _x( 'Sort', 'taxonomy general name', 'framework'),
-    'singular_name' => _x( 'Skill', 'taxonomy singular name', 'framework'),
-    'search_items' =>  __( 'Search Skills', 'framework'),
-    'all_items' => __( 'All Skills', 'framework'),
-    'parent_item' => __( 'Parent Skill', 'framework'),
-    'parent_item_colon' => __( 'Parent Skill:', 'framework'),
-    'edit_item' => __( 'Edit Skill', 'framework'), 
-    'update_item' => __( 'Update Skill', 'framework'),
-    'add_new_item' => __( 'Add New Skill', 'framework'),
-    'new_item_name' => __( 'New Skill Name', 'framework'),
-    'menu_name' => __( 'Skills', 'framework'),
+    'name' => _x( 'Sort', 'Categories', 'framework'),
+    'singular_name' => _x( 'Category', 'taxonomy singular name', 'framework'),
+    'search_items' =>  __( 'Search Categories', 'framework'),
+    'all_items' => __( 'All Categories', 'framework'),
+    'parent_item' => __( 'Parent Category', 'framework'),
+    'parent_item_colon' => __( 'Parent Category:', 'framework'),
+    'edit_item' => __( 'Edit Category', 'framework'), 
+    'update_item' => __( 'Update Category', 'framework'),
+    'add_new_item' => __( 'Add New Category', 'framework'),
+    'new_item_name' => __( 'New Category Name', 'framework'),
+    'menu_name' => __( 'Categories', 'framework'),
   ); 	
 
-  register_taxonomy('sort',array('portfolio'), array(
+  register_taxonomy('sort',array('sony-playstation'), array(
     'hierarchical' => true,
     'labels' => $labels,
     'show_ui' => true,
@@ -796,7 +797,7 @@ class Walker_Portfolio_Filter extends Walker_Category {
       // $link .= $cat_name . '</a>';
       $link .= $cat_name;
       if(!empty($category->description)) {
-         $link .= ' <span>'.$category->description.'</span>';
+         //$link .= ' <span>'.$category->description.'</span>'; //uncoment if category description is to be shown
       }
       $link .= '</a>';
       if ( (! empty($feed_image)) || (! empty($feed)) ) {
@@ -1346,7 +1347,7 @@ function get_thumb($post_ID) {
 } 
 
 // ADD NEW COLUMN
-function portfolio_headers($defaults) {
+function sony_playstation_headers($defaults) {
 	$defaults['categories'] = 'Categories';
 	$defaults['thumbnail'] = 'Thumbnail';
 	$defaults['display_home'] = 'Home Display'; 
@@ -1354,7 +1355,7 @@ function portfolio_headers($defaults) {
 }
 
 // Show featured image
-function portfolio_content($column_name, $post_ID) {
+function sony_playstation_content($column_name, $post_ID) {
  	if ($column_name == 'thumbnail') {
  		$featured_image = get_thumb($post_ID);
  		if ($featured_image) 
@@ -1405,7 +1406,7 @@ function add_quick_home_edit($column_name, $post_type) {
 }
 
 function set_home_value($post_id, $post) {
-  if( $post->post_type != 'portfolio' ) return;
+  if( $post->post_type != 'sony-playstation' ) return;
   if (isset($_POST['home_display_hidden']))
     update_post_meta($post_id, 'ag_home_page_display', $_POST['home_display_hidden']);
 }
@@ -1451,10 +1452,10 @@ function get_home_value() {?>
 }
 
 
-add_filter('manage_portfolio_posts_columns', 'portfolio_headers',10);  
-add_action('manage_portfolio_posts_custom_column', 'portfolio_content', 10, 2);
+add_filter('manage_sony-playstation_posts_columns', 'sony_playstation_headers',10);  
+add_action('manage_sony-playstation_posts_custom_column', 'sony_playstation_content', 10, 2);
 
-add_filter('manage_edit-portfolio_sortable_columns', 'register_sortable' );
+add_filter('manage_edit-sony-playstation_sortable_columns', 'register_sortable' );
 add_filter('request', 'column_orderby');
 
 // Add to quick edit option for home display

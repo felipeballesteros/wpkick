@@ -77,6 +77,7 @@ $browser = $_SERVER['HTTP_USER_AGENT'];
 echo '<style type="text/css">
 ' . $customcss . '
 </style>'; } ?>
+
 <!-- Mobile Specific Metas
   ================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
@@ -84,7 +85,7 @@ echo '<style type="text/css">
 
 <?php if ($hidenavbar = of_get_option('of_hide_nav')) :
 
-		if ($hidenavbar == 'yes' && (is_singular('portfolio') || is_page_template('template-home.php') || is_page_template('template-home-video.php') ) ) : ?>
+		if ($hidenavbar == 'yes' && (is_singular('sony-playstation') || is_page_template('template-home.php') || is_page_template('template-home-video.php') ) ) : ?>
 		<body <?php body_class('hidenavbar'); ?>> <?php 
 		else : ?>
 		<body <?php body_class(); ?>>
@@ -136,7 +137,7 @@ else : ?>
     <?php 
 	/* #If Full Projects Page
 	======================================================*/
-	if(is_front_page() || is_singular('portfolio') || is_page_template('template-home-video.php')) : 	
+	if(is_front_page() || is_singular('sony-playstation') || is_page_template('template-home-video.php')) : 	
 	$video_url = get_post_meta(get_the_ID(), 'ag_video_url', true);	
 	$video_home_url = get_post_meta(get_the_ID(), 'ag_video_url_home', true);
 	
@@ -192,7 +193,7 @@ else : ?>
 <?php endif;?>
 
 
-<?php if(is_front_page() || is_singular('portfolio')) : ?>
+<?php if(is_front_page() || is_singular('sony-playstation')) : ?>
 	<?php 
 	/* #If there's no Video URL
 	======================================================*/

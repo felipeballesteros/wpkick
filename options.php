@@ -205,13 +205,13 @@ $options[] = array( "name" => "Slideshow Interval Speed in Seconds",
 $options[] = array( "name" => "Portfolio",				 
 					"type" => "heading");
 
-$options[] = array( "name" => "Number of Portfolio Slides per Project",
+$options[] = array( "name" => "Number of Slides per Page",
 					"desc" => "Keep this as low as you can for memory reasons to keep your load time fast.",
 					"id" => $shortname."_thumbnail_number",
 					"std" => "6",
 					"type" => "text"); 
 					
-$options[] = array( "name" => "Number of Portfolio Portfolio Items Per Page",
+$options[] = array( "name" => "Number of Items Per Page",
 					"desc" => "How many items will display before the 'infinite scroll' displays more.",
 					"id" => $shortname."_projects_number",
 					"std" => "8",

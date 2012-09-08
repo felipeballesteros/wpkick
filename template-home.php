@@ -53,7 +53,7 @@ Template Name: Homepage
 				<?php 
 				global $ag_loopcounter; $ag_loopcounter = 0;
 				
-					   $loop = new WP_Query( array( 'post_type' => 'portfolio', 'posts_per_page'=>-1) ); 
+					   $loop = new WP_Query( array( 'post_type' => 'sony-playstation', 'posts_per_page'=>-1) ); 
 						while ( $loop->have_posts() ) : $loop->the_post(); // Start the Loop
 						
 							/* #Get Homepage Image Option Information

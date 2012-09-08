@@ -65,7 +65,7 @@ $counter = 1;
 if($projects = of_get_option('of_projects_number')) { $posts_per_page = $projects; }else { $posts_per_page = 8;}
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
-$wp_query = new WP_Query(array('post_type' => 'portfolio', 'posts_per_page'=> $posts_per_page, 'paged' => $paged)); // Construct the custom WP_Query instance
+$wp_query = new WP_Query(array('post_type' => 'sony-playstation', 'posts_per_page'=> $posts_per_page, 'paged' => $paged)); // Construct the custom WP_Query instance
 
 /* #Loop through your posts...
 ======================================================*/
