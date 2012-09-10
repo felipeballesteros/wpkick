@@ -696,9 +696,9 @@ function show_social_icons($permalink,$title){
 /*	Add Custom Portfolio Post Type
 /*-----------------------------------------------------------------------------------*/
 
-add_action( 'init', 'create_portfolio_post_types' );
+add_action( 'init', 'create_post_types' );
 
-function create_portfolio_post_types() {
+function create_post_types() {
 	register_post_type( 'sony-playstation',
 		array(
 			  'labels' => array(
@@ -725,26 +725,57 @@ function create_portfolio_post_types() {
 				'comments'),
 		)
 	);
+
+
+		register_post_type( 'xbox',
+		array(
+			  'labels' => array(
+			  'name' => __( 'XBox', 'framework'),
+			  'singular_name' => __( 'XBox Item', 'framework'),
+			  'add_new' => __( 'Add New', 'framework' ),
+		   	  'add_new_item' => __( 'Add New XBox Item', 'framework'),
+			  'edit' => __( 'Edit', 'framework' ),
+	  		  'edit_item' => __( 'Edit XBox Item', 'framework'),
+	          'new_item' => __( 'New XBox Item', 'framework'),
+			  'view' => __( 'View Sony', 'framework'),
+			  'view_item' => __( 'View XBox Item', 'framework'),
+			  'search_items' => __( 'Search XBox Items', 'framework'),
+	  		  'not_found' => __( 'No XBox items found', 'framework'),
+	  		  'not_found_in_trash' => __( 'No XBox Items found in Trash', 'framework'),
+			  'parent' => __( 'Parent XBox', 'framework'),
+			),
+			'menu_icon' => get_stylesheet_directory_uri() . '/admin/images/xbox.png',
+			'public' => true,
+			'supports' => array( 
+				'title', 
+				'editor',  
+				'thumbnail',
+				'comments'),
+		)
+	);
 }
+
 function custom_icon() {
 	   echo '<style type="text/css">
 		  #icon-edit.icon32.icon32-posts-sony-playstation {
-			background: url('. get_stylesheet_directory_uri() . '/admin/images/playstation-large.png) no-repeat; 
+				background: url('. get_stylesheet_directory_uri() . '/admin/images/playstation-large.png) no-repeat; 
+			}
+			#icon-edit.icon32.icon32-posts-xbox {
+				background: url('. get_stylesheet_directory_uri() . '/admin/images/xbox-large.png) no-repeat; 
 		  }
 		 </style>';
 }
 
 add_action('admin_enqueue_scripts', 'custom_icon', 1);
 
-//hook into the init action and call create_book_taxonomies when it fires
-add_action( 'init', 'ag_create_taxonomies', 0 );
+//hook into the init action and call create taxonomies when it fires
+add_action( 'init', 'create_sony_taxonomies', 0 );
 
-//create two taxonomies, genres and writers for the post type "book"
-function ag_create_taxonomies() 
+function create_sony_taxonomies() 
 {
-  // Add new taxonomy, make it hierarchical (like categories)
+  // Add new taxonomy, make it hierarchical (like categories) -- SONY-PLAYSTATION
   $labels = array(
-    'name' => _x( 'Sort', 'Categories', 'framework'),
+    'name' => _x( 'Sony Playstation Categories', 'Categories', 'framework'),
     'singular_name' => _x( 'Category', 'taxonomy singular name', 'framework'),
     'search_items' =>  __( 'Search Categories', 'framework'),
     'all_items' => __( 'All Categories', 'framework'),
@@ -757,15 +788,66 @@ function ag_create_taxonomies()
     'menu_name' => __( 'Categories', 'framework'),
   ); 	
 
-  register_taxonomy('sort',array('sony-playstation'), array(
+  register_taxonomy('Sony Playstation Categories',array('sony-playstation'), array(
     'hierarchical' => true,
     'labels' => $labels,
     'show_ui' => true,
     'query_var' => true,
-    'rewrite' => array( 'slug' => 'sort' ),
+    'rewrite' => array( 'slug' => 'sony-playstation-categories' ),
   ));
 
+  // Add new taxonomy, make it hierarchical (like categories) -- XBOX
+  $labels = array(
+    'name' => _x( 'XBox Categories', 'Categories', 'framework'),
+    'singular_name' => _x( 'Category', 'taxonomy singular name', 'framework'),
+    'search_items' =>  __( 'Search XBox Categories', 'framework'),
+    'all_items' => __( 'All XBox Categories', 'framework'),
+    'parent_item' => __( 'Parent XBox Category', 'framework'),
+    'parent_item_colon' => __( 'Parent XBox Category:', 'framework'),
+    'edit_item' => __( 'Edit XBox Category', 'framework'), 
+    'update_item' => __( 'Update XBox Category', 'framework'),
+    'add_new_item' => __( 'Add New XBox Category', 'framework'),
+    'new_item_name' => __( 'New XBox Category Name', 'framework'),
+    'menu_name' => __( 'Categories', 'framework'),
+  ); 	
+
+  register_taxonomy('XBox Categories',array('xbox'), array(
+    'hierarchical' => true,
+    'labels' => $labels,
+    'show_ui' => true,
+    'query_var' => true,
+    'rewrite' => array( 'slug' => 'xbox-categories' ),
+  ));
 }
+
+// //hook into the init action and call create taxonomies when it fires
+// add_action( 'init', 'create_xbox_taxonomies', 0 );
+
+// function create_xbox_taxonomies() 
+// {
+//   // Add new taxonomy, make it hierarchical (like categories) -- XBOX
+//   $labels = array(
+//     'name' => _x( 'XBox Categories', 'XBox Categories', 'framework'),
+//     'singular_name' => _x( 'XBox Category', 'taxonomy singular name', 'framework'),
+//     'search_items' =>  __( 'Search XBox Categories', 'framework'),
+//     'all_items' => __( 'All XBox Categories', 'framework'),
+//     'parent_item' => __( 'Parent XBox Category', 'framework'),
+//     'parent_item_colon' => __( 'Parent XBox Category:', 'framework'),
+//     'edit_item' => __( 'Edit XBox Category', 'framework'), 
+//     'update_item' => __( 'Update XBox Category', 'framework'),
+//     'add_new_item' => __( 'Add New XBox Category', 'framework'),
+//     'new_item_name' => __( 'New XBox Category Name', 'framework'),
+//     'menu_name' => __( 'XBox Categories', 'framework'),
+//   ); 	
+
+//   register_taxonomy('sort',array('xbox'), array(
+//     'hierarchical' => false,
+//     'labels' => $labels,
+//     'show_ui' => true,
+//     'query_var' => true,
+//     'rewrite' => array( 'slug' => 'sort' ),
+//   ));
+// }
 
 /*-----------------------------------------------------------------------------------*/
 /*	Load Text Domain
@@ -1366,6 +1448,10 @@ function sony_playstation_content($column_name, $post_ID) {
  	elseif ($column_name == 'display_home') {
  		$home_display = get_post_meta(get_the_id(), 'ag_home_page_display', true); 
  		echo $home_display;
+ 	}
+ 	elseif ($column_name == 'categories'){
+ 		echo $cat_name = 'felipe';
+ 		echo $cat_name;
  	}
 }
 
