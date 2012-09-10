@@ -820,34 +820,6 @@ function create_sony_taxonomies()
   ));
 }
 
-// //hook into the init action and call create taxonomies when it fires
-// add_action( 'init', 'create_xbox_taxonomies', 0 );
-
-// function create_xbox_taxonomies() 
-// {
-//   // Add new taxonomy, make it hierarchical (like categories) -- XBOX
-//   $labels = array(
-//     'name' => _x( 'XBox Categories', 'XBox Categories', 'framework'),
-//     'singular_name' => _x( 'XBox Category', 'taxonomy singular name', 'framework'),
-//     'search_items' =>  __( 'Search XBox Categories', 'framework'),
-//     'all_items' => __( 'All XBox Categories', 'framework'),
-//     'parent_item' => __( 'Parent XBox Category', 'framework'),
-//     'parent_item_colon' => __( 'Parent XBox Category:', 'framework'),
-//     'edit_item' => __( 'Edit XBox Category', 'framework'), 
-//     'update_item' => __( 'Update XBox Category', 'framework'),
-//     'add_new_item' => __( 'Add New XBox Category', 'framework'),
-//     'new_item_name' => __( 'New XBox Category Name', 'framework'),
-//     'menu_name' => __( 'XBox Categories', 'framework'),
-//   ); 	
-
-//   register_taxonomy('sort',array('xbox'), array(
-//     'hierarchical' => false,
-//     'labels' => $labels,
-//     'show_ui' => true,
-//     'query_var' => true,
-//     'rewrite' => array( 'slug' => 'sort' ),
-//   ));
-// }
 
 /*-----------------------------------------------------------------------------------*/
 /*	Load Text Domain
