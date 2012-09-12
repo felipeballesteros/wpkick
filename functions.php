@@ -1503,7 +1503,6 @@ function get_home_value() {?>
 	 	);
 	});
 
-
 	</script>
 
 <?php
