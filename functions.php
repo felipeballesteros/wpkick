@@ -1401,7 +1401,7 @@ function get_thumb($post_ID) {
 } 
 
 // ADD NEW COLUMN
-function sony_playstation_headers($defaults) {
+function headers($defaults) {
 	$defaults['categories'] = 'Categories';
 	$defaults['thumbnail'] = 'Thumbnail';
 	$defaults['display_home'] = 'Home Display'; 
@@ -1409,7 +1409,7 @@ function sony_playstation_headers($defaults) {
 }
 
 // Show featured image
-function sony_playstation_content($column_name, $post_ID) {
+function content($column_name, $post_ID) {
  	if ($column_name == 'thumbnail') {
  		$featured_image = get_thumb($post_ID);
  		if ($featured_image) 
@@ -1464,7 +1464,7 @@ function add_quick_home_edit($column_name, $post_type) {
 }
 
 function set_home_value($post_id, $post) {
-  if( $post->post_type != 'sony-playstation' ) return;
+  if( $post->post_type != 'sony-playstation' || 'xbox' ) return;
   if (isset($_POST['home_display_hidden']))
     update_post_meta($post_id, 'ag_home_page_display', $_POST['home_display_hidden']);
 }
@@ -1510,8 +1510,11 @@ function get_home_value() {?>
 }
 
 
-add_filter('manage_sony-playstation_posts_columns', 'sony_playstation_headers',10);  
-add_action('manage_sony-playstation_posts_custom_column', 'sony_playstation_content', 10, 2);
+add_filter('manage_sony-playstation_posts_columns', 'headers',10);  
+add_action('manage_sony-playstation_posts_custom_column', 'content', 10, 2);
+
+add_filter('manage_xbox_posts_columns', 'headers',10);  
+add_action('manage_xbox_custom_column', 'content', 10, 2);
 
 add_filter('manage_edit-sony-playstation_sortable_columns', 'register_sortable' );
 add_filter('request', 'column_orderby');
