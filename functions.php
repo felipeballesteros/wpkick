@@ -33,7 +33,7 @@ function optionsframework_custom_scripts() { ?>
 jQuery(document).ready(function() {
 
 	jQuery('#example_showhidden').click(function() {
-  		jQuery('.section.hidden').fadeToggle(400);
+		jQuery('.section.hidden').fadeToggle(400);
 	});
 	
 	if (jQuery('#example_showhidden:checked').val() !== undefined) {
@@ -192,7 +192,7 @@ function ag_register_js() {
 		wp_enqueue_script('supersized');
 		wp_enqueue_script('prettyPhoto'); 
 		wp_enqueue_script('wmu');
-	    wp_enqueue_script('tabs');
+		wp_enqueue_script('tabs');
 		wp_enqueue_script('fitvid');
 		wp_enqueue_script('isotope');
 		wp_enqueue_script('swfobject');
@@ -248,17 +248,17 @@ add_action('wp_print_styles', 'themename_enqueue_css');
 add_theme_support('menus');
 
 if ( function_exists( 'register_nav_menus' ) ) {
-    register_nav_menus(
-        array(
-          'top_nav_menu' => 'Main Navigation Menu'
-        )
-    );
+	register_nav_menus(
+		array(
+		  'top_nav_menu' => 'Main Navigation Menu'
+		)
+	);
 	
 // remove menu container div
 function my_wp_nav_menu_args( $args = '' )
 {
-    $args['container'] = false;
-    return $args;
+	$args['container'] = false;
+	return $args;
 } // function
 add_filter( 'wp_nav_menu_args', 'my_wp_nav_menu_args' );
 }
@@ -282,8 +282,8 @@ if ( ! isset( $content_width ) ) $content_width = 415;
 /*-----------------------------------------------------------------------------------*/
 
 if(function_exists('add_theme_support')) {
-    add_theme_support('automatic-feed-links');
-    //WP Auto Feed Links
+	add_theme_support('automatic-feed-links');
+	//WP Auto Feed Links
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -318,49 +318,49 @@ add_filter('the_content_more_link', 'remove_more_jump_link');
 
 function get_attachment_id( $url ) {
 
-    $dir = wp_upload_dir();
-    $dir = trailingslashit($dir['baseurl']);
+	$dir = wp_upload_dir();
+	$dir = trailingslashit($dir['baseurl']);
 
-    if( false === strpos( $url, $dir ) )
-        return false;
+	if( false === strpos( $url, $dir ) )
+		return false;
 
-    $file = basename($url);
+	$file = basename($url);
 
-    $query = array(
-        'post_type' => 'attachment',
-        'fields' => 'ids',
-        'meta_query' => array(
-            array(
-                'value' => $file,
-                'compare' => 'LIKE',
-            )
-        )
-    );
+	$query = array(
+		'post_type' => 'attachment',
+		'fields' => 'ids',
+		'meta_query' => array(
+			array(
+				'value' => $file,
+				'compare' => 'LIKE',
+			)
+		)
+	);
 
-    $query['meta_query'][0]['key'] = '_wp_attached_file';
-    $ids = get_posts( $query );
+	$query['meta_query'][0]['key'] = '_wp_attached_file';
+	$ids = get_posts( $query );
 
-    foreach( $ids as $id )
-        if( $url == array_shift( wp_get_attachment_image_src($id, 'full') ) )
-            return $id;
+	foreach( $ids as $id )
+		if( $url == array_shift( wp_get_attachment_image_src($id, 'full') ) )
+			return $id;
 
-    $query['meta_query'][0]['key'] = '_wp_attachment_metadata';
-    $ids = get_posts( $query );
+	$query['meta_query'][0]['key'] = '_wp_attachment_metadata';
+	$ids = get_posts( $query );
 
-    foreach( $ids as $id ) {
+	foreach( $ids as $id ) {
 
-        $meta = wp_get_attachment_metadata($id);
+		$meta = wp_get_attachment_metadata($id);
 
-        foreach( $meta['sizes'] as $size => $values )
-            if( $values['file'] == $file && $url == array_shift( wp_get_attachment_image_src($id, $size) ) ) {
+		foreach( $meta['sizes'] as $size => $values )
+			if( $values['file'] == $file && $url == array_shift( wp_get_attachment_image_src($id, $size) ) ) {
 				if(isset($id->attachment_size)){
-                $id->attachment_size = $size;
+				$id->attachment_size = $size;
 				}
-                return $id;
-            }
-    }
+				return $id;
+			}
+	}
 
-    return false;
+	return false;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -438,7 +438,7 @@ function get_portfolio_info ($id, $thumbnum) {
 			  $fitalways = 0; $fitlandscape = 0; $fitportrait = 0;
 			  
 			  $fitting = get_post_meta($id, 'ag_fit', true); //Get the fitting setting for slideshow
-			  	
+				
 				switch ($fitting) {
 					case 'Fit Portrait':
 						$fitportrait = 1;
@@ -467,8 +467,8 @@ function get_portfolio_info ($id, $thumbnum) {
 				 ${"full" . $counter} = MultiPostThumbnails::get_post_thumbnail_id('portfolio', $counter . '-slide', $id); // Get Image ID
 				 ${"alt" . $counter} = get_post_meta(${"full" . $counter} , '_wp_attachment_image_alt', true); // Alt text of image			 
 				 ${"full" . $counter} = wp_get_attachment_image_src(${"full" . $counter}, 'portfoliolarge', false); // URL of Second Slide Full Image 
-    			 ${"thumbid" . $counter} = MultiPostThumbnails::get_post_thumbnail_id('portfolio',  $counter . '-slide', $id); 
-			  	 ${"thumb" . $counter} = wp_get_attachment_image_src(${"thumbid" . $counter}, 'portfoliosmall', false); // URL of next Slide 
+				 ${"thumbid" . $counter} = MultiPostThumbnails::get_post_thumbnail_id('portfolio',  $counter . '-slide', $id); 
+				 ${"thumb" . $counter} = wp_get_attachment_image_src(${"thumbid" . $counter}, 'portfoliosmall', false); // URL of next Slide 
 				 ${"thumbnc" . $counter} = wp_get_attachment_image_src(${"thumbid" . $counter}, 'portfoliosmallnc', false); // URL of next Slide 
 		
 			 $counter++;
@@ -508,8 +508,8 @@ function get_homepage_info ($id) {
 }
 
 function ag_loophide($loopcounter) {
-	       if ($loopcounter == 1) {
-        echo '<style>
+		   if ($loopcounter == 1) {
+		echo '<style>
 		.playcontrols, #slidecounter, #tray-button, #slide-list, #progress-back {
 		display:none !important;	
 		}
@@ -537,18 +537,18 @@ function the_post_thumbnail_caption() {
    $thumbnail_image = get_posts($args);
 
    if ($thumbnail_image && isset($thumbnail_image[0])) {
-     //show thumbnail title
-     echo $thumbnail_image[0]->post_title; 
+	 //show thumbnail title
+	 echo $thumbnail_image[0]->post_title; 
 
-     //Uncomment to show the thumbnail caption
-     //echo $thumbnail_image[0]->post_excerpt; 
+	 //Uncomment to show the thumbnail caption
+	 //echo $thumbnail_image[0]->post_excerpt; 
 
-     //Uncomment to show the thumbnail description
-     //echo $thumbnail_image[0]->post_content; 
+	 //Uncomment to show the thumbnail description
+	 //echo $thumbnail_image[0]->post_content; 
 
-     //Uncomment to show the thumbnail alt field
-     //$alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
-     //if(count($alt)) echo $alt;
+	 //Uncomment to show the thumbnail alt field
+	 //$alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
+	 //if(count($alt)) echo $alt;
   }
 }
 
@@ -561,30 +561,30 @@ add_filter( 'post_thumbnail_html', 'remove_thumbnail_dimensions', 10, 3 );
 function remove_thumbnail_dimensions( $html, $post_id, $post_image_id ) {
 
 
-        $html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
-    return $html;
+		$html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
+	return $html;
 } 
 /*
 Check to see if the function exists
 */
 
 if(function_exists('add_theme_support')) {
-    /** Exists! So add the post-thumbnail */
-    add_theme_support('post-thumbnails');
+	/** Exists! So add the post-thumbnail */
+	add_theme_support('post-thumbnails');
  
-    /** Now Set some image sizes */
+	/** Now Set some image sizes */
  
-    /** #1 for our featured content slider */
-    add_image_size( $name = 'itg_featured', $width = 500, $height = 300, $crop = true );
+	/** #1 for our featured content slider */
+	add_image_size( $name = 'itg_featured', $width = 500, $height = 300, $crop = true );
  
-    /** #2 for post thumbnail */
-    add_image_size( 'itg_post', 250, 250, true );
+	/** #2 for post thumbnail */
+	add_image_size( 'itg_post', 250, 250, true );
  
-    /** #3 for widget thumbnail */
-    add_image_size( 'itg_widget', 40, 40, true );
+	/** #3 for widget thumbnail */
+	add_image_size( 'itg_widget', 40, 40, true );
  
-    /** Set default post thumbnail size */
-    set_post_thumbnail_size($width = 50, $height = 50, $crop = true);
+	/** Set default post thumbnail size */
+	set_post_thumbnail_size($width = 50, $height = 50, $crop = true);
 }
 
 add_filter("manage_upload_columns", 'upload_columns');
@@ -626,11 +626,11 @@ function media_custom_columns($column_name, $id) {
 
 
 function mytheme_enqueue_comment_reply() {
-    // on single blog post pages with comments open and threaded comments
-    if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) { 
-        // enqueue the javascript that performs in-link comment reply fanciness
-        wp_enqueue_script( 'comment-reply' ); 
-    }
+	// on single blog post pages with comments open and threaded comments
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) { 
+		// enqueue the javascript that performs in-link comment reply fanciness
+		wp_enqueue_script( 'comment-reply' ); 
+	}
 }
 // Hook into wp_enqueue_scripts
 add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_comment_reply' );
@@ -641,31 +641,31 @@ add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_comment_reply' );
 
 function ag_comment($comment, $args, $depth) {
 
-    $isByAuthor = false;
+	$isByAuthor = false;
 
-    if($comment->comment_author_email == get_the_author_meta('email')) {
-        $isByAuthor = true;
-    }
+	if($comment->comment_author_email == get_the_author_meta('email')) {
+		$isByAuthor = true;
+	}
 
-    $GLOBALS['comment'] = $comment; ?>
+	$GLOBALS['comment'] = $comment; ?>
    <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
    <div id="comment-<?php comment_ID(); ?>" class="singlecomment">
-      <p class="commentsmetadata"><cite>
-            <?php comment_date('F j, Y'); ?>
-            </cite></p>
-    <div class="author">
-            <div class="reply"><?php echo comment_reply_link(array('depth' => $depth, 'max_depth' => $args['max_depth'])); ?></div>
+	  <p class="commentsmetadata"><cite>
+			<?php comment_date('F j, Y'); ?>
+			</cite></p>
+	<div class="author">
+			<div class="reply"><?php echo comment_reply_link(array('depth' => $depth, 'max_depth' => $args['max_depth'])); ?></div>
  
-            <div class="name"><?php comment_author_link() ?></div>
-        </div>
-      <?php if ($comment->comment_approved == '0') : ?>
-         <p class="moderation"><?php _e('Your comment is awaiting moderation.', 'framework') ?></p>
-     
-      <?php endif; ?>
-      
-        <div class="commenttext">
-            <?php comment_text() ?>
-        </div>
+			<div class="name"><?php comment_author_link() ?></div>
+		</div>
+	  <?php if ($comment->comment_approved == '0') : ?>
+		 <p class="moderation"><?php _e('Your comment is awaiting moderation.', 'framework') ?></p>
+	 
+	  <?php endif; ?>
+	  
+		<div class="commenttext">
+			<?php comment_text() ?>
+		</div>
 </div>
 <div class="clear"></div>
 <?php
@@ -685,10 +685,10 @@ function show_social_icons($permalink,$title){
 	
 	$title = htmlspecialchars($title);
 	echo'<div class="socialicons">';
-    echo '<a href="http://twitter.com/share?url='.$permalink.'&text='.$title.'" class="twitterlink tooltip-top" title="'. __("Share on Twitter", "framework").'">'. __("Share on Twitter", "framework").'</a>';
-    echo '<a href="http://www.facebook.com/sharer.php?'.$permalink.'" class="fblink tooltip-top" title="'.__("Share on Facebook", "framework").'">'.__("Share on Facebook", "framework").'</a>';
-    echo '<a href="mailto:?subject='.$title.'&body='.__("Check out", "framework").' &#39;'.$title .'&#39;:%0D%0A'.$permalink.'" class="maillink tooltip-top" title="'.__("Email This", "framework").'">'. __('Email This', 'framework').'</a>';
-    echo '<div class="clear"></div></div>';
+	echo '<a href="http://twitter.com/share?url='.$permalink.'&text='.$title.'" class="twitterlink tooltip-top" title="'. __("Share on Twitter", "framework").'">'. __("Share on Twitter", "framework").'</a>';
+	echo '<a href="http://www.facebook.com/sharer.php?'.$permalink.'" class="fblink tooltip-top" title="'.__("Share on Facebook", "framework").'">'.__("Share on Facebook", "framework").'</a>';
+	echo '<a href="mailto:?subject='.$title.'&body='.__("Check out", "framework").' &#39;'.$title .'&#39;:%0D%0A'.$permalink.'" class="maillink tooltip-top" title="'.__("Email This", "framework").'">'. __('Email This', 'framework').'</a>';
+	echo '<div class="clear"></div></div>';
 	}
 
 
@@ -705,15 +705,15 @@ function create_post_types() {
 			  'name' => __( 'Sony', 'framework'),
 			  'singular_name' => __( 'Sony Item', 'framework'),
 			  'add_new' => __( 'Add New', 'framework' ),
-		   	  'add_new_item' => __( 'Add New Sony Item', 'framework'),
+			  'add_new_item' => __( 'Add New Sony Item', 'framework'),
 			  'edit' => __( 'Edit', 'framework' ),
-	  		  'edit_item' => __( 'Edit Sony Item', 'framework'),
-	          'new_item' => __( 'New Sony Item', 'framework'),
+			  'edit_item' => __( 'Edit Sony Item', 'framework'),
+			  'new_item' => __( 'New Sony Item', 'framework'),
 			  'view' => __( 'View Sony', 'framework'),
 			  'view_item' => __( 'View Sony Item', 'framework'),
 			  'search_items' => __( 'Search Sony Items', 'framework'),
-	  		  'not_found' => __( 'No Sony items found', 'framework'),
-	  		  'not_found_in_trash' => __( 'No Sony Items found in Trash', 'framework'),
+			  'not_found' => __( 'No Sony items found', 'framework'),
+			  'not_found_in_trash' => __( 'No Sony Items found in Trash', 'framework'),
 			  'parent' => __( 'Parent Sony', 'framework'),
 			),
 			'menu_icon' => get_stylesheet_directory_uri() . '/admin/images/playstation.png',
@@ -733,15 +733,15 @@ function create_post_types() {
 			  'name' => __( 'XBox', 'framework'),
 			  'singular_name' => __( 'XBox Item', 'framework'),
 			  'add_new' => __( 'Add New', 'framework' ),
-		   	  'add_new_item' => __( 'Add New XBox Item', 'framework'),
+			  'add_new_item' => __( 'Add New XBox Item', 'framework'),
 			  'edit' => __( 'Edit', 'framework' ),
-	  		  'edit_item' => __( 'Edit XBox Item', 'framework'),
-	          'new_item' => __( 'New XBox Item', 'framework'),
+			  'edit_item' => __( 'Edit XBox Item', 'framework'),
+			  'new_item' => __( 'New XBox Item', 'framework'),
 			  'view' => __( 'View Sony', 'framework'),
 			  'view_item' => __( 'View XBox Item', 'framework'),
 			  'search_items' => __( 'Search XBox Items', 'framework'),
-	  		  'not_found' => __( 'No XBox items found', 'framework'),
-	  		  'not_found_in_trash' => __( 'No XBox Items found in Trash', 'framework'),
+			  'not_found' => __( 'No XBox items found', 'framework'),
+			  'not_found_in_trash' => __( 'No XBox Items found in Trash', 'framework'),
 			  'parent' => __( 'Parent XBox', 'framework'),
 			),
 			'menu_icon' => get_stylesheet_directory_uri() . '/admin/images/xbox.png',
@@ -775,48 +775,48 @@ function create_sony_taxonomies()
 {
   // Add new taxonomy, make it hierarchical (like categories) -- SONY-PLAYSTATION
   $labels = array(
-    'name' => _x( 'Sony Playstation Categories', 'Categories', 'framework'),
-    'singular_name' => _x( 'Category', 'taxonomy singular name', 'framework'),
-    'search_items' =>  __( 'Search Categories', 'framework'),
-    'all_items' => __( 'All Categories', 'framework'),
-    'parent_item' => __( 'Parent Category', 'framework'),
-    'parent_item_colon' => __( 'Parent Category:', 'framework'),
-    'edit_item' => __( 'Edit Category', 'framework'), 
-    'update_item' => __( 'Update Category', 'framework'),
-    'add_new_item' => __( 'Add New Category', 'framework'),
-    'new_item_name' => __( 'New Category Name', 'framework'),
-    'menu_name' => __( 'Categories', 'framework'),
+	'name' => _x( 'Sony Playstation Categories', 'Categories', 'framework'),
+	'singular_name' => _x( 'Category', 'taxonomy singular name', 'framework'),
+	'search_items' =>  __( 'Search Categories', 'framework'),
+	'all_items' => __( 'All Categories', 'framework'),
+	'parent_item' => __( 'Parent Category', 'framework'),
+	'parent_item_colon' => __( 'Parent Category:', 'framework'),
+	'edit_item' => __( 'Edit Category', 'framework'), 
+	'update_item' => __( 'Update Category', 'framework'),
+	'add_new_item' => __( 'Add New Category', 'framework'),
+	'new_item_name' => __( 'New Category Name', 'framework'),
+	'menu_name' => __( 'Categories', 'framework'),
   ); 	
 
   register_taxonomy('Sony Playstation Categories',array('sony-playstation'), array(
-    'hierarchical' => true,
-    'labels' => $labels,
-    'show_ui' => true,
-    'query_var' => true,
-    'rewrite' => array( 'slug' => 'sony-playstation-categories' ),
+	'hierarchical' => false,
+	'labels' => $labels,
+	'show_ui' => true,
+	'query_var' => true,
+	'rewrite' => array( 'slug' => 'sony-playstation-categories' ),
   ));
 
   // Add new taxonomy, make it hierarchical (like categories) -- XBOX
   $labels = array(
-    'name' => _x( 'XBox Categories', 'Categories', 'framework'),
-    'singular_name' => _x( 'Category', 'taxonomy singular name', 'framework'),
-    'search_items' =>  __( 'Search XBox Categories', 'framework'),
-    'all_items' => __( 'All XBox Categories', 'framework'),
-    'parent_item' => __( 'Parent XBox Category', 'framework'),
-    'parent_item_colon' => __( 'Parent XBox Category:', 'framework'),
-    'edit_item' => __( 'Edit XBox Category', 'framework'), 
-    'update_item' => __( 'Update XBox Category', 'framework'),
-    'add_new_item' => __( 'Add New XBox Category', 'framework'),
-    'new_item_name' => __( 'New XBox Category Name', 'framework'),
-    'menu_name' => __( 'Categories', 'framework'),
+	'name' => _x( 'XBox Categories', 'Categories', 'framework'),
+	'singular_name' => _x( 'Category', 'taxonomy singular name', 'framework'),
+	'search_items' =>  __( 'Search XBox Categories', 'framework'),
+	'all_items' => __( 'All XBox Categories', 'framework'),
+	'parent_item' => __( 'Parent XBox Category', 'framework'),
+	'parent_item_colon' => __( 'Parent XBox Category:', 'framework'),
+	'edit_item' => __( 'Edit XBox Category', 'framework'), 
+	'update_item' => __( 'Update XBox Category', 'framework'),
+	'add_new_item' => __( 'Add New XBox Category', 'framework'),
+	'new_item_name' => __( 'New XBox Category Name', 'framework'),
+	'menu_name' => __( 'Categories', 'framework'),
   ); 	
 
   register_taxonomy('XBox Categories',array('xbox'), array(
-    'hierarchical' => true,
-    'labels' => $labels,
-    'show_ui' => true,
-    'query_var' => true,
-    'rewrite' => array( 'slug' => 'xbox-categories' ),
+	'hierarchical' => true,
+	'labels' => $labels,
+	'show_ui' => true,
+	'query_var' => true,
+	'rewrite' => array( 'slug' => 'xbox-categories' ),
   ));
 }
 
@@ -826,7 +826,7 @@ function create_sony_taxonomies()
 /*-----------------------------------------------------------------------------------*/
 
 function theme_init(){
-    load_theme_textdomain('framework', get_template_directory() . '/lang');
+	load_theme_textdomain('framework', get_template_directory() . '/lang');
 }
 add_action ('init', 'theme_init');
 
@@ -836,65 +836,69 @@ add_action ('init', 'theme_init');
 /*	New category walker for portfolio filter
 /*-----------------------------------------------------------------------------------*/
 
-class Walker_Portfolio_Filter extends Walker_Category {
+	class Walker_Portfolio_Filter extends Walker_Category {
    function start_el(&$output, $category, $depth, $args) {
 
-      extract($args);
-      $cat_name = esc_attr( $category->name);
-      $cat_name = apply_filters( 'list_cats', $cat_name, $category );
-      $link = '<a href="#" data-filter=".'.strtolower(preg_replace('/\s+/', '-', $cat_name)).'" ';
-      if ( $use_desc_for_title == 0 || empty($category->description) )
-         $link .= 'title="' . sprintf(__( 'View all projects filed under %s', 'framework'), $cat_name) . '"';
-      else
-         $link .= 'title="' . esc_attr( strip_tags( apply_filters( 'category_description', $category->description, $category ) ) ) . '"';
-      $link .= '>';
-      // $link .= $cat_name . '</a>';
-      $link .= $cat_name;
-      if(!empty($category->description)) {
-         //$link .= ' <span>'.$category->description.'</span>'; //uncoment if category description is to be shown
-      }
-      $link .= '</a>';
-      if ( (! empty($feed_image)) || (! empty($feed)) ) {
-         $link .= ' ';
-         if ( empty($feed_image) )
-            $link .= '(';
-         $link .= '<a href="' . get_category_feed_link($category->term_id, $feed_type) . '"';
-         if ( empty($feed) )
-            $alt = ' alt="' . sprintf(__( 'Feed for all posts filed under %s', 'framework'), $cat_name ) . '"';
-         else {
-            $title = ' title="' . $feed . '"';
-            $alt = ' alt="' . $feed . '"';
-            $name = $feed;
-            $link .= $title;
-         }
-         $link .= '>';
-         if ( empty($feed_image) )
-            $link .= $name;
-         else
-            $link .= "<img src='$feed_image'$alt$title" . ' />';
-         $link .= '</a>';
-         if ( empty($feed_image) )
-            $link .= ')';
-      }
-      if ( isset($show_count) && $show_count )
-         $link .= ' (' . intval($category->count) . ')';
-      if ( isset($show_date) && $show_date ) {
-         $link .= ' ' . gmdate('Y-m-d', $category->last_update_timestamp);
-      }
-      if ( isset($current_category) && $current_category )
-         $_current_category = get_category( $current_category );
-      if ( 'list' == $args['style'] ) {
-          $output .= '<li class="segment-2"';
-          $class = 'cat-item cat-item-'.$category->term_id;
-          if ( isset($current_category) && $current_category && ($category->term_id == $current_category) )
-             $class .=  ' current-cat';
-          elseif ( isset($_current_category) && $_current_category && ($category->term_id == $_current_category->parent) )
-             $class .=  ' current-cat-parent';
-          $output .=  '';
-          $output .= ">$link\n";
-       } else {
-          $output .= "\t$link<br />\n";
-       }
+	  extract($args);
+	  $cat_name = esc_attr( $category->name);
+	  
+	  $cat_name = apply_filters( 'list_cats', $cat_name, $category );
+
+	  $link = '<a href="#" data-filter=".'.strtolower(preg_replace('/\s+/', '-', $cat_name)).'" ';
+
+
+	  if ( $use_desc_for_title == 0 || empty($category->description) )
+		 $link .= 'title="' . sprintf(__( 'View all projects filed under %s', 'framework'), $cat_name) . '"';
+	  else
+		 $link .= 'title="' . esc_attr( strip_tags( apply_filters( 'category_description', $category->description, $category ) ) ) . '"';
+	  $link .= '>';
+	  // $link .= $cat_name . '</a>';
+	  $link .= $cat_name;
+	  if(!empty($category->description)) {
+		 //$link .= ' <span>'.$category->description.'</span>'; //uncoment if category description is to be shown
+	  }
+	  $link .= '</a>';
+	  if ( (! empty($feed_image)) || (! empty($feed)) ) {
+		 $link .= ' ';
+		 if ( empty($feed_image) )
+			$link .= '(';
+		 $link .= '<a href="' . get_category_feed_link($category->term_id, $feed_type) . '"';
+		 if ( empty($feed) )
+			$alt = ' alt="' . sprintf(__( 'Feed for all posts filed under %s', 'framework'), $cat_name ) . '"';
+		 else {
+			$title = ' title="' . $feed . '"';
+			$alt = ' alt="' . $feed . '"';
+			$name = $feed;
+			$link .= $title;
+		 }
+		 $link .= '>';
+		 if ( empty($feed_image) )
+			$link .= $name;
+		 else
+			$link .= "<img src='$feed_image'$alt$title" . ' />';
+		 $link .= '</a>';
+		 if ( empty($feed_image) )
+			$link .= ')';
+	  }
+	  if ( isset($show_count) && $show_count )
+		 $link .= ' (' . intval($category->count) . ')';
+	  if ( isset($show_date) && $show_date ) {
+		 $link .= ' ' . gmdate('Y-m-d', $category->last_update_timestamp);
+	  }
+	  if ( isset($current_category) && $current_category )
+		 $_current_category = get_category( $current_category );
+	  if ( 'list' == $args['style'] ) {
+		  $output .= '<li class="segment-2"';
+		  $class = 'cat-item cat-item-'.$category->term_id;
+		  if ( isset($current_category) && $current_category && ($category->term_id == $current_category) )
+			 $class .=  ' current-cat';
+		  elseif ( isset($_current_category) && $_current_category && ($category->term_id == $_current_category->parent) )
+			 $class .=  ' current-cat-parent';
+		  $output .=  '';
+		  $output .= ">$link\n";
+	   } else {
+		  $output .= "\t$link<br />\n";
+	   }
    }
 }
 
@@ -909,89 +913,89 @@ function add_ag_shortcodes() {
    if ( current_user_can('edit_posts') &&  current_user_can('edit_pages') )  
    {  
    
-   	 //Add "button" button
-     add_filter('mce_external_plugins', 'add_plugin_button');  
-     add_filter('mce_buttons', 'register_button');  
+	 //Add "button" button
+	 add_filter('mce_external_plugins', 'add_plugin_button');  
+	 add_filter('mce_buttons', 'register_button');  
 	 
-     //Add "divider" button
-     add_filter('mce_external_plugins', 'add_plugin_divider');  
-     add_filter('mce_buttons', 'register_divider'); 
-     
+	 //Add "divider" button
+	 add_filter('mce_external_plugins', 'add_plugin_divider');  
+	 add_filter('mce_buttons', 'register_divider'); 
+	 
 	 //Add "tabs" button
-     add_filter('mce_external_plugins', 'add_plugin_featuredfulltabs');  
-     add_filter('mce_buttons', 'register_featuredfulltabs');   
+	 add_filter('mce_external_plugins', 'add_plugin_featuredfulltabs');  
+	 add_filter('mce_buttons', 'register_featuredfulltabs');   
 	 
 	 //Add "lightbox" button
-     add_filter('mce_external_plugins', 'add_plugin_lightbox');  
-     add_filter('mce_buttons', 'register_lightbox');  
+	 add_filter('mce_external_plugins', 'add_plugin_lightbox');  
+	 add_filter('mce_buttons', 'register_lightbox');  
 	 
 	 //Add "shortcodes" buttons - 3rd row
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_onehalf');  
-     add_filter('mce_buttons_3', 'register_onehalf'); 
+	 add_filter('mce_buttons_3', 'register_onehalf'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_onehalflast');  
-     add_filter('mce_buttons_3', 'register_onehalflast'); 
+	 add_filter('mce_buttons_3', 'register_onehalflast'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_onethird');  
-     add_filter('mce_buttons_3', 'register_onethird'); 
+	 add_filter('mce_buttons_3', 'register_onethird'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_onethirdlast');  
-     add_filter('mce_buttons_3', 'register_onethirdlast');
+	 add_filter('mce_buttons_3', 'register_onethirdlast');
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_twothird');  
-     add_filter('mce_buttons_3', 'register_twothird'); 
+	 add_filter('mce_buttons_3', 'register_twothird'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_twothirdlast');  
-     add_filter('mce_buttons_3', 'register_twothirdlast'); 
+	 add_filter('mce_buttons_3', 'register_twothirdlast'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_onefourth');  
-     add_filter('mce_buttons_3', 'register_onefourth'); 
+	 add_filter('mce_buttons_3', 'register_onefourth'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_onefourthlast');  
-     add_filter('mce_buttons_3', 'register_onefourthlast');
+	 add_filter('mce_buttons_3', 'register_onefourthlast');
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_threefourth');  
-     add_filter('mce_buttons_3', 'register_threefourth'); 
+	 add_filter('mce_buttons_3', 'register_threefourth'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_threefourthlast');  
-     add_filter('mce_buttons_3', 'register_threefourthlast');
+	 add_filter('mce_buttons_3', 'register_threefourthlast');
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_onefifth');  
-     add_filter('mce_buttons_3', 'register_onefifth'); 
+	 add_filter('mce_buttons_3', 'register_onefifth'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_onefifthlast');  
-     add_filter('mce_buttons_3', 'register_onefifthlast');
+	 add_filter('mce_buttons_3', 'register_onefifthlast');
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_twofifth');  
-     add_filter('mce_buttons_3', 'register_twofifth'); 
+	 add_filter('mce_buttons_3', 'register_twofifth'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_twofifthlast');  
-     add_filter('mce_buttons_3', 'register_twofifthlast');
+	 add_filter('mce_buttons_3', 'register_twofifthlast');
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_threefifth');  
-     add_filter('mce_buttons_3', 'register_threefifth'); 
+	 add_filter('mce_buttons_3', 'register_threefifth'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_threefifthlast');  
-     add_filter('mce_buttons_3', 'register_threefifthlast');
+	 add_filter('mce_buttons_3', 'register_threefifthlast');
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_fourfifth');  
-     add_filter('mce_buttons_3', 'register_fourfifth'); 
+	 add_filter('mce_buttons_3', 'register_fourfifth'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_fourfifthlast');  
-     add_filter('mce_buttons_3', 'register_fourfifthlast');
+	 add_filter('mce_buttons_3', 'register_fourfifthlast');
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_onesixth');  
-     add_filter('mce_buttons_3', 'register_onesixth'); 
+	 add_filter('mce_buttons_3', 'register_onesixth'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_onesixthlast');  
-     add_filter('mce_buttons_3', 'register_onesixthlast');
+	 add_filter('mce_buttons_3', 'register_onesixthlast');
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_fivesixth');  
-     add_filter('mce_buttons_3', 'register_fivesixth'); 
+	 add_filter('mce_buttons_3', 'register_fivesixth'); 
 	 
 	 add_filter('mce_external_plugins', 'add_plugin_fivesixthlast');  
-     add_filter('mce_buttons_3', 'register_fivesixthlast');
+	 add_filter('mce_buttons_3', 'register_fivesixthlast');
 	 
    }  
 }  
@@ -1247,21 +1251,21 @@ function add_plugin_fivesixthlast($plugin_array) {
 
 function parse_shortcode_content( $content ) {
 
-    /* Parse nested shortcodes and add formatting. */
-    $content = trim( wpautop( do_shortcode( $content ) ) );
+	/* Parse nested shortcodes and add formatting. */
+	$content = trim( wpautop( do_shortcode( $content ) ) );
 
-    /* Remove '</p>' from the start of the string. */
-    if ( substr( $content, 0, 4 ) == '</p>' )
-        $content = substr( $content, 4 );
+	/* Remove '</p>' from the start of the string. */
+	if ( substr( $content, 0, 4 ) == '</p>' )
+		$content = substr( $content, 4 );
 
-    /* Remove '<p>' from the end of the string. */
-    if ( substr( $content, -3, 3 ) == '<p>' )
-        $content = substr( $content, 0, -3 );
+	/* Remove '<p>' from the end of the string. */
+	if ( substr( $content, -3, 3 ) == '<p>' )
+		$content = substr( $content, 0, -3 );
 
-    /* Remove any instances of '<p></p>'. */
-    $content = str_replace( array( '<p></p>' ), '', $content );
+	/* Remove any instances of '<p></p>'. */
+	$content = str_replace( array( '<p></p>' ), '', $content );
 
-    return $content;
+	return $content;
 }
 
 function get_attachment_id_from_src ($image_src) {
@@ -1286,14 +1290,14 @@ Text Domain:
 
 /*  Copyright 2012, Jan Jonas, (email : mail@janjonas.net)
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as 
-    published by the Free Software Foundation.
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License, version 2, as 
+	published by the Free Software Foundation.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
 
 */
@@ -1322,7 +1326,7 @@ function wpac_initialize() {
 
 
 function wpac_is_login_page() {
-    return in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
+	return in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
 }
 
 if (!is_admin() && !wpac_is_login_page()) {
@@ -1386,18 +1390,18 @@ add_filter('next_posts_link_attributes', 'posts_link_attributes');
 add_filter('previous_posts_link_attributes', 'posts_link_attributes');
 
 function posts_link_attributes() {
-    return 'class="button"';
+	return 'class="button"';
 }
 
 //Felipe Ballesteros Additions
 
 //GET FEATURED IMAGE  
 function get_thumb($post_ID) {  
-    $post_thumbnail_id = get_post_thumbnail_id($post_ID);  
+	$post_thumbnail_id = get_post_thumbnail_id($post_ID);  
 
-    if ($post_thumbnail_id)
-      $thumb = wp_get_attachment_image_src($post_thumbnail_id, array(16, 9), true );
-    return $thumb[0];
+	if ($post_thumbnail_id)
+	  $thumb = wp_get_attachment_image_src($post_thumbnail_id, array(16, 9), true );
+	return $thumb[0];
 } 
 
 // ADD NEW COLUMN
@@ -1410,21 +1414,21 @@ function headers($defaults) {
 
 // Show featured image
 function content($column_name, $post_ID) {
- 	if ($column_name == 'thumbnail') {
- 		$featured_image = get_thumb($post_ID);
- 		if ($featured_image) 
- 			echo '<img src="' . $featured_image . '" />';
- 		else 
- 			echo '<i>No image set</i>';
- 	}
- 	elseif ($column_name == 'display_home') {
- 		$home_display = get_post_meta(get_the_id(), 'ag_home_page_display', true); 
- 		echo $home_display;
- 	}
- 	elseif ($column_name == 'categories'){
- 		echo $cat_name = 'felipe';
- 		echo $cat_name;
- 	}
+	if ($column_name == 'thumbnail') {
+		$featured_image = get_thumb($post_ID);
+		if ($featured_image) 
+			echo '<img src="' . $featured_image . '" />';
+		else 
+			echo '<i>No image set</i>';
+	}
+	elseif ($column_name == 'display_home') {
+		$home_display = get_post_meta(get_the_id(), 'ag_home_page_display', true); 
+		echo $home_display;
+	}
+	elseif ($column_name == 'categories'){
+		echo $cat_name = 'felipe';
+		echo $cat_name;
+	}
 }
 
 function register_sortable($columns) {
@@ -1449,7 +1453,7 @@ function column_orderby( $vars ) {
 function add_quick_home_edit($column_name, $post_type) {
 	if ($column_name != 'display_home') return;
 	?>
-    <fieldset class="inline-edit-col-left">
+	<fieldset class="inline-edit-col-left">
 	<div class="inline-edit-col">
 		<span class="title">Display Home</span><br />
 
@@ -1459,14 +1463,14 @@ function add_quick_home_edit($column_name, $post_type) {
 			<input type="hidden" name="home_display_hidden" value="true" />
 		</div>
 	</div>
-    </fieldset>
+	</fieldset>
 	<?php
 }
 
 function set_home_value($post_id, $post) {
   if( $post->post_type != 'sony-playstation' || 'xbox' ) return;
   if (isset($_POST['home_display_hidden']))
-    update_post_meta($post_id, 'ag_home_page_display', $_POST['home_display_hidden']);
+	update_post_meta($post_id, 'ag_home_page_display', $_POST['home_display_hidden']);
 }
 
 
@@ -1474,8 +1478,8 @@ function get_home_value() {?>
 
    <script type="text/javascript">
 
-    jQuery('input[name=home_display]').live('click', function(){
-    	if (jQuery(this).val() === "Yes")
+	jQuery('input[name=home_display]').live('click', function(){
+		if (jQuery(this).val() === "Yes")
 			jQuery('input[name=home_display_hidden]').val('Yes'); //set value on hidden field
 		else
 			jQuery('input[name=home_display_hidden]').val('No'); //set value on hidden field
@@ -1487,20 +1491,20 @@ function get_home_value() {?>
 			pageUrl = "<?php echo get_template_directory_uri() ?>/functions/actions.php";
 
 		jQuery.post(
-		    pageUrl,
- 		    { post_id: home_display_value, mode: 'ajaxget'},
- 			function(data) { 
+			pageUrl,
+			{ post_id: home_display_value, mode: 'ajaxget'},
+			function(data) { 
 
- 				jQuery('input[name=home_display_hidden]').val(data); //set value on hidden field
+				jQuery('input[name=home_display_hidden]').val(data); //set value on hidden field
 
- 				if (data === 'Yes')
- 					jQuery('#home_display_cont #home_yes').prop('checked',true);
- 				else if (data === 'No')
- 					jQuery('#home_display_cont #home_no').prop('checked',true);
- 				else
- 					return;
- 			}
-	 	);
+				if (data === 'Yes')
+					jQuery('#home_display_cont #home_yes').prop('checked',true);
+				else if (data === 'No')
+					jQuery('#home_display_cont #home_no').prop('checked',true);
+				else
+					return;
+			}
+		);
 	});
 
 	</script>

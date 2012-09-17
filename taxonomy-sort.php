@@ -40,7 +40,7 @@ $counter = 1;
 $current_sort = get_query_var('sort');
 if($projects = of_get_option('of_projects_number')) { $posts_per_page = $projects; }else { $posts_per_page = 8;}
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$args = array('post_type' => 'sony-playstation', 'posts_per_page'=> $posts_per_page, 'sort' => $current_sort);
+$args = array('post_type' => 'portfolio', 'posts_per_page'=> $posts_per_page, 'sort' => $current_sort);
 query_posts($args);
 
 /* #Loop through your posts...
