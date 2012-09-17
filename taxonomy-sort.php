@@ -54,7 +54,7 @@ query_posts($args);
 	$thumb = wp_get_attachment_image_src($thumb[0], 'portfoliosmall', false);  // URL of Featured Full Image
 
 	
-	if ($portfoliodisplay !== 'Yes') : ?>
+	if ($portfoliodisplay !== 'Yes') :  ?>
     
     <!-- Portfolio Item -->
     <div class="portfoliothumb <?php if ($terms) { foreach ($terms as $term) { echo strtolower(preg_replace('/\s+/', '-', $term->name)). ' '; } } ?>">     
