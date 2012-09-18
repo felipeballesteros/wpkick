@@ -38,8 +38,8 @@ html, body{
     -webkit-border-radius: 5px;
     border-radius: 5px;
     border: 1px solid #fff;
-    -webkit-box-shadow: 0px 2px 1px 0px #333;
-    box-shadow: 0px 2px 1px 0px #333;
+    -webkit-box-shadow: 0px 2px 1px 0px #999;
+    box-shadow: 0px 2px 1px 0px #999;
 }
 
 .login label{
@@ -116,6 +116,7 @@ html, body{
     text-shadow: #1C6B00 0 1px 0;
     color: #ffffff;
     font-size: 14px;
+    border: 1px solid #666;
 }
 
 #login_error {
