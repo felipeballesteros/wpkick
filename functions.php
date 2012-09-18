@@ -413,7 +413,7 @@ if ( $thumbnum = of_get_option('of_thumbnail_number') ) { $thumbnum = ($thumbnum
 			array( 
 				'label' => 'Slide ' . $counter1, 
 				'id' => $counter1 . '-slide', 
-				'post_type' => 'sony-playstation' 
+				'post_type' => 'sony-playstation', 'xbox',
 			)); $counter1++;
 	}
 }
@@ -1402,6 +1402,7 @@ function get_thumb($post_ID) {
 	if ($post_thumbnail_id)
 	  $thumb = wp_get_attachment_image_src($post_thumbnail_id, array(16, 9), true );
 	return $thumb[0];
+	echo $thumb[0];
 } 
 
 // ADD NEW COLUMN
@@ -1517,7 +1518,7 @@ add_filter('manage_sony-playstation_posts_columns', 'headers',10);
 add_action('manage_sony-playstation_posts_custom_column', 'content', 10, 2);
 
 add_filter('manage_xbox_posts_columns', 'headers',10);  
-add_action('manage_xbox_custom_column', 'content', 10, 2);
+add_action('manage_xbox_posts_custom_column', 'content', 10, 2);
 
 add_filter('manage_edit-sony-playstation_sortable_columns', 'register_sortable' );
 add_filter('request', 'column_orderby');
