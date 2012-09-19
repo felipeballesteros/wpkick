@@ -9,11 +9,11 @@ add_action('post_edit_form_tag', 'xxxx_add_edit_form_multipart_encoding');
 
 $prefix = 'ag_';
 $url =  get_template_directory_uri() .'/admin/images/';
- 
+
 $meta_box_homepage = array(
 	'id' => 'ag-meta-box-homepage',
 	'title' => __('Homepage Slide Options', 'framework'),
-	'post' => 'sony-playstation', 'xbox',
+	'page' => $postType,
 	'context' => 'normal',
 	'priority' => 'core',
 	'fields' => array(
@@ -93,7 +93,7 @@ $meta_box_homepage = array(
 $meta_box_video = array(
 	'id' => 'ag-meta-box-video',
 	'title' => __('Optional Video', 'framework'),
-	'page' => 'sony-playstation', 'xbox',
+	'page' => $postType,
 	'context' => 'normal',
 	'priority' => 'core',
 	'fields' => array(
@@ -112,7 +112,7 @@ $meta_box_video = array(
 $meta_box_video_home = array(
 	'id' => 'ag-meta-box-video-home',
 	'title' => __('Homepage Video', 'framework'),
-	'page' => 'page',
+	'page' => $postType,
 	'context' => 'normal',
 	'priority' => 'core',
 	'fields' => array(
@@ -145,7 +145,7 @@ $meta_box_video_home = array(
 $meta_box_options = array(
 	'id' => 'ag-meta-box-options',
 	'title' => __('Additional Options', 'framework'),
-	'page' => 'sony-playstation', 'xbox',
+	'page' => $postType,
 	'context' => 'normal',
 	'priority' => 'core',
 	'fields' => array(
@@ -170,20 +170,25 @@ function mytheme_add_box() {
 	global $meta_box_video;
 	global $meta_box_video_home;
 	global $meta_box_options;
+
+	// Add as needed
+	$post_types = array('sony-playstation', 'xbox');
  
-	add_meta_box($meta_box_homepage['id'], $meta_box_homepage['title'], 'mytheme_show_homepage_box', $meta_box_homepage['page'], $meta_box_homepage['context'], $meta_box_homepage['priority']);
-	add_meta_box($meta_box_video['id'], $meta_box_video['title'], 'mytheme_show_video_box', $meta_box_video['page'], $meta_box_video['context'], $meta_box_video['priority']);
-	add_meta_box($meta_box_options['id'], $meta_box_options['title'], 'mytheme_show_options_box', $meta_box_options['page'], $meta_box_options['context'], $meta_box_options['priority']);
-	
+ 	foreach ( $post_types as $post_type ) {
+		add_meta_box($meta_box_homepage['id'], $meta_box_homepage['title'], 'mytheme_show_homepage_box', $post_type, $meta_box_homepage['context'],  $meta_box_homepage['priority']);
+		add_meta_box($meta_box_video['id'], $meta_box_video['title'], 'mytheme_show_video_box', $post_type, $meta_box_video['context'], $meta_box_video['priority']);
+		add_meta_box($meta_box_options['id'], $meta_box_options['title'], 'mytheme_show_options_box', $post_type, $meta_box_options['context'], $meta_box_options['priority']);
+	}
+
 	if(isset($_GET['post'])) {
-	$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'] ;
-    $template_file = get_post_meta($post_id,'_wp_page_template',TRUE);
+		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'] ;
+    	$template_file = get_post_meta($post_id,'_wp_page_template',TRUE);
    
-  // check for a template type
-  if ($template_file == 'template-home-video.php') {
-	add_meta_box($meta_box_video_home['id'], $meta_box_video_home['title'], 'mytheme_show_videohome_box', "page", $meta_box_video_home['context'], $meta_box_video_home['priority']);
-  }
-   }
+  		// check for a template type
+  		if ($template_file == 'template-home-video.php') {
+			add_meta_box($meta_box_video_home['id'], $meta_box_video_home['title'], 'mytheme_show_videohome_box', "page", $meta_box_video_home['context'], $meta_box_video_home['priority']);
+  		}
+   	}
 }
  
 // Callback function to show fields in meta box
