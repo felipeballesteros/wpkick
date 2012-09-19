@@ -11,7 +11,6 @@ if(isset($_POST['mode'])){
         $ids = explode(" ", $_POST['ids']);
         foreach ( $ids as $post_id)
             update_post_meta($post_id, 'ag_home_page_display', $_POST['val']);
-        echo "Event date updated.";
     } 
     return;
 }

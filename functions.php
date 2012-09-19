@@ -789,7 +789,7 @@ function create_sony_taxonomies()
   ); 	
 
   register_taxonomy('Sony Playstation Categories',array('sony-playstation'), array(
-	'hierarchical' => false,
+	'hierarchical' => true,
 	'labels' => $labels,
 	'show_ui' => true,
 	'query_var' => true,
@@ -1469,7 +1469,7 @@ function add_quick_home_edit($column_name, $post_type) {
 }
 
 function set_home_value($post_id, $post) {
-  if( $post->post_type != 'sony-playstation' || 'xbox' ) return;
+  //if( $post->post_type != 'sony-playstation' || $post->post_type != 'xbox' ) return;   ---> FIX THIS LINE,
   if (isset($_POST['home_display_hidden']))
 	update_post_meta($post_id, 'ag_home_page_display', $_POST['home_display_hidden']);
 }
@@ -1496,7 +1496,7 @@ function get_home_value() {?>
 			{ post_id: home_display_value, mode: 'ajaxget'},
 			function(data) { 
 
-				jQuery('input[name=home_display_hidden]').val(data); //set value on hidden field
+				jQuery('input[name=home_display_hidden]').val(data); //get value on hidden field
 
 				if (data === 'Yes')
 					jQuery('#home_display_cont #home_yes').prop('checked',true);
@@ -1513,20 +1513,22 @@ function get_home_value() {?>
 <?php
 }
 
-
+/* For Sony Playstation */
 add_filter('manage_sony-playstation_posts_columns', 'headers',10);  
-add_action('manage_sony-playstation_posts_custom_column', 'content', 10, 2);
-
-add_filter('manage_xbox_posts_columns', 'headers',10);  
-add_action('manage_xbox_posts_custom_column', 'content', 10, 2);
-
 add_filter('manage_edit-sony-playstation_sortable_columns', 'register_sortable' );
 add_filter('request', 'column_orderby');
+add_filter('manage_edit-xbox_sortable_columns', 'register_sortable' );
 
 // Add to quick edit option for home display
+add_action('manage_sony-playstation_posts_custom_column', 'content', 10, 2);
 add_action('quick_edit_custom_box',  'add_quick_home_edit', 10, 2);
 add_action('admin_head-edit.php', 'get_home_value');
 add_action('edit_post','set_home_value', 10, 3);
+
+
+/* For XBox */
+add_filter('manage_xbox_posts_columns', 'headers',10);  
+add_action('manage_xbox_posts_custom_column', 'content', 10, 2);
 
 
 /*-----------------------------------------------------------------------------------*/
