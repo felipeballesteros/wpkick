@@ -769,13 +769,13 @@ function custom_icon() {
 add_action('admin_enqueue_scripts', 'custom_icon', 1);
 
 //hook into the init action and call create taxonomies when it fires
-add_action( 'init', 'create_sony_taxonomies', 0 );
+add_action( 'init', 'create_taxonomies', 0 );
 
-function create_sony_taxonomies() 
+function create_taxonomies() 
 {
   // Add new taxonomy, make it hierarchical (like categories) -- SONY-PLAYSTATION
-  $labels = array(
-	'name' => _x( 'Sony Playstation Categories', 'Categories', 'framework'),
+  $sonylabels = array(
+	'name' => _x( 'Sony Playstation Categories', 'taxonomy general name', 'framework'),
 	'singular_name' => _x( 'Category', 'taxonomy singular name', 'framework'),
 	'search_items' =>  __( 'Search Categories', 'framework'),
 	'all_items' => __( 'All Categories', 'framework'),
@@ -790,15 +790,15 @@ function create_sony_taxonomies()
 
   register_taxonomy('Sony Playstation Categories',array('sony-playstation'), array(
 	'hierarchical' => true,
-	'labels' => $labels,
+	'labels' => $sonylabels,
 	'show_ui' => true,
 	'query_var' => true,
 	'rewrite' => array( 'slug' => 'sony-playstation-categories' ),
   ));
 
   // Add new taxonomy, make it hierarchical (like categories) -- XBOX
-  $labels = array(
-	'name' => _x( 'XBox Categories', 'Categories', 'framework'),
+  $xboxlabels = array(
+	'name' => _x( 'XBox Categories', 'taxonomy general name', 'framework'),
 	'singular_name' => _x( 'Category', 'taxonomy singular name', 'framework'),
 	'search_items' =>  __( 'Search XBox Categories', 'framework'),
 	'all_items' => __( 'All XBox Categories', 'framework'),
@@ -813,7 +813,7 @@ function create_sony_taxonomies()
 
   register_taxonomy('XBox Categories',array('xbox'), array(
 	'hierarchical' => true,
-	'labels' => $labels,
+	'labels' => $xboxlabels,
 	'show_ui' => true,
 	'query_var' => true,
 	'rewrite' => array( 'slug' => 'xbox-categories' ),
@@ -833,7 +833,7 @@ add_action ('init', 'theme_init');
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	New category walker for portfolio filter
+/*	New category walker for isotope filter
 /*-----------------------------------------------------------------------------------*/
 
 	class Walker_Portfolio_Filter extends Walker_Category {
