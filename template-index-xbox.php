@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Page - Index Xbox
+Template Name: Page - Index XBox
 */
 ?>
 <?php get_header(); ?>
@@ -36,7 +36,7 @@ ag_fullscreen_bg($pageimage[0]);
     	<div class="filterwrap">
             <ul class="filter" id="filters">
                 <li><a href="#" data-filter="*" class="active"><?php _e('All', 'framework');?></a></li>
-                <?php wp_list_categories(array('title_li' => '', 'taxonomy' => 'Xbox Categories', 'show_option_none'   => '', 'walker' => new Walker_Portfolio_Filter())); ?>
+                <?php wp_list_categories(array('title_li' => '', 'taxonomy' => 'XBox Categories', 'show_option_none'   => '', 'walker' => new Walker_Portfolio_Filter())); ?>
                <div class="clear"></div>
             </ul>
     	</div>
@@ -72,7 +72,7 @@ $wp_query = new WP_Query(array('post_type' => 'xbox', 'posts_per_page'=> $posts_
 while ( $wp_query->have_posts() ) : $wp_query->the_post();
 	  
 	$portfoliodisplay = get_post_meta(get_the_ID(), 'ag_portfolio_page_display', true);
-	$terms = get_the_terms( get_the_ID(), 'Xbox Categories' );
+	$terms = get_the_terms( get_the_ID(), 'XBox Categories' );
 	$post_url = get_permalink(); //Get Permalink for post 
 	$thumb1 = get_post_meta($post->ID,'_thumbnail_id',false); 
 	$thumb = wp_get_attachment_image_src($thumb1[0], 'portfoliosmall', false);  // URL of Featured Full Image
