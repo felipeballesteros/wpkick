@@ -414,6 +414,13 @@ if ( $thumbnum = of_get_option('of_thumbnail_number') ) { $thumbnum = ($thumbnum
 				'label' => 'Slide ' . $counter1, 
 				'id' => $counter1 . '-slide', 
 				'post_type' => 'sony-playstation', 'xbox',
+			)); 
+
+		new MultiPostThumbnails( 
+			array( 
+				'label' => 'Slide ' . $counter1, 
+				'id' => $counter1 . '-slide', 
+				'post_type' => 'sony-playstation', 'xbox',
 			)); $counter1++;
 	}
 }
