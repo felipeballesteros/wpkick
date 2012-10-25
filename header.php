@@ -137,7 +137,10 @@ else : ?>
     <?php 
 	/* #If Full Projects Page
 	======================================================*/
-	if(is_front_page() || is_singular('sony-playstation') || is_page_template('template-home-video.php')) : 	
+	if(is_front_page() 
+    || is_singular('sony-playstation')
+    || is_singular('xbox')
+    || is_page_template('template-home-video.php')) : 	
 	$video_url = get_post_meta(get_the_ID(), 'ag_video_url', true);	
 	$video_home_url = get_post_meta(get_the_ID(), 'ag_video_url_home', true);
 	
