@@ -795,12 +795,12 @@ function create_taxonomies()
 	'menu_name' => __( 'Categories', 'framework'),
   ); 	
 
-  register_taxonomy('Sony Playstation Categories',array('sony-playstation'), array(
+  register_taxonomy('sony-playstation-categories',array('sony-playstation'), array(
 	'hierarchical' => true,
 	'labels' => $sonylabels,
 	'show_ui' => true,
 	'query_var' => true,
-	'rewrite' => array( 'slug' => 'sony-playstation-categories' ),
+	'rewrite' => array( 'slug' => 'Sony Playstation Categories' ),
   ));
 
   // Add new taxonomy, make it hierarchical (like categories) -- XBOX
@@ -818,12 +818,12 @@ function create_taxonomies()
 	'menu_name' => __( 'Categories', 'framework'),
   ); 	
 
-  register_taxonomy('XBox Categories',array('xbox'), array(
+  register_taxonomy('xbox-categories',array('xbox'), array(
 	'hierarchical' => true,
 	'labels' => $xboxlabels,
 	'show_ui' => true,
 	'query_var' => true,
-	'rewrite' => array( 'slug' => 'xbox-categories' ),
+	'rewrite' => array( 'slug' => 'XBox Categories' ),
   ));
 }
 
