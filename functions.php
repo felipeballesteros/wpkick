@@ -781,6 +781,7 @@ add_action( 'init', 'create_taxonomies', 0 );
 function create_taxonomies() 
 {
   // Add new taxonomy, make it hierarchical (like categories) -- SONY-PLAYSTATION
+
   $sonylabels = array(
 	'name' => _x( 'Sony Playstation Categories', 'taxonomy general name', 'framework'),
 	'singular_name' => _x( 'Category', 'taxonomy singular name', 'framework'),
@@ -795,6 +796,7 @@ function create_taxonomies()
 	'menu_name' => __( 'Categories', 'framework'),
   ); 	
 
+  // taxonomy name = custom post type + '-categories'
   register_taxonomy('sony-playstation-categories',array('sony-playstation'), array(
 	'hierarchical' => true,
 	'labels' => $sonylabels,
@@ -818,6 +820,7 @@ function create_taxonomies()
 	'menu_name' => __( 'Categories', 'framework'),
   ); 	
 
+  // taxonomy name = custom post type + '-categories'
   register_taxonomy('xbox-categories',array('xbox'), array(
 	'hierarchical' => true,
 	'labels' => $xboxlabels,
@@ -1414,7 +1417,7 @@ function get_thumb($post_ID) {
 
 // ADD NEW COLUMN
 function headers($defaults) {
-	$defaults['categories'] = 'Categories';
+	$defaults['category'] = 'Categories';
 	$defaults['thumbnail'] = 'Thumbnail';
 	$defaults['display_home'] = 'Home Display'; 
 	return $defaults;
@@ -1433,9 +1436,22 @@ function content($column_name, $post_ID) {
 		$home_display = get_post_meta(get_the_id(), 'ag_home_page_display', true); 
 		echo $home_display;
 	}
-	elseif ($column_name == 'categories'){
-		echo $cat_name = 'felipe';
-		echo $cat_name;
+	elseif ($column_name == 'category'){
+
+		// Assuming that the category is always custom post type name + 'categories'
+		$taxonomy = get_post_type( $post_ID ) . '-categories';
+	    $terms = get_the_terms($post_ID, $taxonomy);
+	    
+	 
+	    if ( !empty($terms) ) {
+	        foreach ( $terms as $term )
+
+	        	//Edit this line to instead link to the sub section page
+	            $post_terms[] = "<a href='edit.php?post_type={$post_type}&{$taxonomy}={$term->slug}'> " . esc_html(sanitize_term_field('name', $term->name, $term->term_id, $taxonomy, 'edit')) . "</a>";
+	        echo join( ', ', $post_terms );
+	    }
+	    else echo '<i>No Categories</i>';
+
 	}
 }
 
@@ -1457,7 +1473,6 @@ function column_orderby( $vars ) {
 
 
 //Replace select dropdown with radio buttons for the three options
- 
 function add_quick_home_edit($column_name, $post_type) {
 	if ($column_name != 'display_home') return;
 	?>
@@ -1476,7 +1491,6 @@ function add_quick_home_edit($column_name, $post_type) {
 }
 
 function set_home_value($post_id, $post) {
-  //if( $post->post_type != 'sony-playstation' || $post->post_type != 'xbox' ) return;   ---> FIX THIS LINE,
   if (isset($_POST['home_display_hidden']))
 	update_post_meta($post_id, 'ag_home_page_display', $_POST['home_display_hidden']);
 }
@@ -1532,11 +1546,9 @@ add_action('quick_edit_custom_box',  'add_quick_home_edit', 10, 2);
 add_action('admin_head-edit.php', 'get_home_value');
 add_action('edit_post','set_home_value', 10, 3);
 
-
 /* For XBox */
 add_filter('manage_xbox_posts_columns', 'headers',10);  
 add_action('manage_xbox_posts_custom_column', 'content', 10, 2);
-
 
 /*-----------------------------------------------------------------------------------*/
 /* Add Custom Login Page
