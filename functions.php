@@ -700,29 +700,38 @@ function show_social_icons($permalink,$title){
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add Custom Portfolio Post Type
+/*	Add Custom Post Types
 /*-----------------------------------------------------------------------------------*/
 
 add_action( 'init', 'create_post_types' );
 
 function create_post_types() {
+
+	$terms = get_the_terms($post_ID, $taxonomy);
+
 	register_post_type( 'sony-playstation',
 		array(
-			  'labels' => array(
-			  'name' => __( 'Sony', 'framework'),
-			  'singular_name' => __( 'Sony Item', 'framework'),
-			  'add_new' => __( 'Add New', 'framework' ),
-			  'add_new_item' => __( 'Add New Sony Item', 'framework'),
-			  'edit' => __( 'Edit', 'framework' ),
-			  'edit_item' => __( 'Edit Sony Item', 'framework'),
-			  'new_item' => __( 'New Sony Item', 'framework'),
-			  'view' => __( 'View Sony', 'framework'),
-			  'view_item' => __( 'View Sony Item', 'framework'),
-			  'search_items' => __( 'Search Sony Items', 'framework'),
-			  'not_found' => __( 'No Sony items found', 'framework'),
-			  'not_found_in_trash' => __( 'No Sony Items found in Trash', 'framework'),
-			  'parent' => __( 'Parent Sony', 'framework'),
+			'labels' => array(
+			'name' => __( 'Sony', 'framework'),
+			'singular_name' => __( 'Sony Item', 'framework'),
+			'add_new' => __( 'Add New', 'framework' ),
+			'add_new_item' => __( 'Add New Sony Item', 'framework'),
+			'edit' => __( 'Edit', 'framework' ),
+			'edit_item' => __( 'Edit Sony Item', 'framework'),
+			'new_item' => __( 'New Sony Item', 'framework'),
+			'view' => __( 'View Sony', 'framework'),
+			'view_item' => __( 'View Sony Item', 'framework'),
+			'search_items' => __( 'Search Sony Items', 'framework'),
+			'not_found' => __( 'No Sony items found', 'framework'),
+			'not_found_in_trash' => __( 'No Sony Items found in Trash', 'framework'),
+			'parent' => __( 'Parent Sony', 'framework')
 			),
+
+			'hierarchical' => true,
+			'rewrite'=> false, array(
+            		//'slug' => '%rating%',
+            		'with_front' => false
+        	   ),
 			'menu_icon' => get_stylesheet_directory_uri() . '/admin/images/playstation.png',
 			'public' => true,
 			'supports' => array( 
@@ -734,23 +743,31 @@ function create_post_types() {
 	);
 
 
-		register_post_type( 'xbox',
+	register_post_type( 'xbox',
 		array(
-			  'labels' => array(
-			  'name' => __( 'XBox', 'framework'),
-			  'singular_name' => __( 'XBox Item', 'framework'),
-			  'add_new' => __( 'Add New', 'framework' ),
-			  'add_new_item' => __( 'Add New XBox Item', 'framework'),
-			  'edit' => __( 'Edit', 'framework' ),
-			  'edit_item' => __( 'Edit XBox Item', 'framework'),
-			  'new_item' => __( 'New XBox Item', 'framework'),
-			  'view' => __( 'View Sony', 'framework'),
-			  'view_item' => __( 'View XBox Item', 'framework'),
-			  'search_items' => __( 'Search XBox Items', 'framework'),
-			  'not_found' => __( 'No XBox items found', 'framework'),
-			  'not_found_in_trash' => __( 'No XBox Items found in Trash', 'framework'),
-			  'parent' => __( 'Parent XBox', 'framework'),
+			'labels' => array(
+			'name' => __( 'XBox', 'framework'),
+			'singular_name' => __( 'XBox Item', 'framework'),
+			'add_new' => __( 'Add New', 'framework' ),
+			'add_new_item' => __( 'Add New XBox Item', 'framework'),
+			'edit' => __( 'Edit', 'framework' ),
+			'edit_item' => __( 'Edit XBox Item', 'framework'),
+			'new_item' => __( 'New XBox Item', 'framework'),
+			'view' => __( 'View Sony', 'framework'),
+			'view_item' => __( 'View XBox Item', 'framework'),
+			'search_items' => __( 'Search XBox Items', 'framework'),
+			'not_found' => __( 'No XBox items found', 'framework'),
+			'not_found_in_trash' => __( 'No XBox Items found in Trash', 'framework'),
+			'parent' => __( 'Parent XBox', 'framework')
+
 			),
+
+		    'hierarchical' => true,
+			'rewrite' => false, array(
+					    //'slug' => 'event',
+					    //'slug' => 'xbox/Rating',
+					    'with_front' => false
+					),
 			'menu_icon' => get_stylesheet_directory_uri() . '/admin/images/xbox.png',
 			'public' => true,
 			'supports' => array( 
@@ -760,7 +777,63 @@ function create_post_types() {
 				'comments'),
 		)
 	);
+
 }
+
+
+
+
+
+
+
+
+/* * * * * * * * */
+
+add_action('init', 'my_rating_init');
+ 
+function my_rating_init() {
+    if (!is_taxonomy('rating')) {
+        register_taxonomy( 'rating', 'xbox',
+                   array(   'hierarchical' => false, 
+                   			'label' => __('Rating'), 
+                        	'public' => TRUE, 'show_ui' => TRUE,
+                        	'query_var' => 'rating',
+                        	'rewrite' => true, array('slug'=>'rating', 'with_front'=>false, 'hierarchical'=>true) ) );
+    }
+}
+
+
+add_filter('post_link', 'rating_permalink');
+add_filter('post_type_link', 'rating_permalink');
+ 
+function rating_permalink($permalink, $post_id, $leavename) {
+    if (strpos($permalink, '%rating%') === false) return $permalink;
+     
+        // Get post
+        $post = get_post($post_id);
+        if (!$post) return $permalink;
+ 
+        // Get taxonomy terms
+        $terms = wp_get_object_terms($post->ID, 'rating');   
+        if (!is_wp_error($terms) && !empty($terms) && is_object($terms[0])) 
+        	$taxonomy_slug = $terms[0]->slug;
+        else 
+        	$taxonomy_slug = 'not-rated';
+ 
+    return str_replace('%rating%', $taxonomy_slug, $permalink);
+
+}    
+
+
+
+
+
+
+
+
+/* * * * * * * * */
+
+
 
 function custom_icon() {
 	   echo '<style type="text/css">
@@ -798,7 +871,7 @@ function create_taxonomies()
 
   // taxonomy name = custom post type + '-categories'
   register_taxonomy('sony-playstation-categories',array('sony-playstation'), array(
-	'hierarchical' => true,
+	'hierarchical' => false,
 	'labels' => $sonylabels,
 	'show_ui' => true,
 	'query_var' => true,
@@ -829,7 +902,6 @@ function create_taxonomies()
 	'rewrite' => array( 'slug' => 'XBox Categories' ),
   ));
 }
-
 
 /*-----------------------------------------------------------------------------------*/
 /*	Load Text Domain
