@@ -707,7 +707,14 @@ add_action( 'init', 'create_post_types' );
 
 function create_post_types() {
 
-	$terms = get_the_terms($post_ID, $taxonomy);
+// add rewrite rules to get categories on the url
+global $wp_rewrite;
+$xbox_structure = '/xbox/%xbox-categories%/%postname%';
+$wp_rewrite->add_rewrite_tag("%xbox-categories%", '([^/]+)', "xbox-categories=");
+$wp_rewrite->add_permastruct('xbox', $xbox_structure, true);
+
+
+$terms = get_the_terms($post_ID, $taxonomy);
 
 	register_post_type( 'sony-playstation',
 		array(
@@ -729,11 +736,13 @@ function create_post_types() {
 
 			'hierarchical' => true,
 			'rewrite'=> false, array(
-            		//'slug' => '%rating%',
+            		//'slug' => '/%rating%',
             		'with_front' => false
         	   ),
 			'menu_icon' => get_stylesheet_directory_uri() . '/admin/images/playstation.png',
+			'query_var' => true,
 			'public' => true,
+			'publicly_queryable' => true,
 			'supports' => array( 
 				'title', 
 				'editor',  
@@ -741,6 +750,7 @@ function create_post_types() {
 				'comments'),
 		)
 	);
+
 
 
 	register_post_type( 'xbox',
@@ -765,11 +775,13 @@ function create_post_types() {
 		    'hierarchical' => true,
 			'rewrite' => false, array(
 					    //'slug' => 'event',
-					    //'slug' => 'xbox/Rating',
-					    'with_front' => false
+					    //'slug' => '%xbox-categories%',
+					    'with_front' => true
 					),
 			'menu_icon' => get_stylesheet_directory_uri() . '/admin/images/xbox.png',
 			'public' => true,
+			'publicly_queryable' => true,
+			'query_var' => true,
 			'supports' => array( 
 				'title', 
 				'editor',  
@@ -779,60 +791,6 @@ function create_post_types() {
 	);
 
 }
-
-
-
-
-
-
-
-
-/* * * * * * * * */
-
-add_action('init', 'my_rating_init');
- 
-function my_rating_init() {
-    if (!is_taxonomy('rating')) {
-        register_taxonomy( 'rating', 'xbox',
-                   array(   'hierarchical' => false, 
-                   			'label' => __('Rating'), 
-                        	'public' => TRUE, 'show_ui' => TRUE,
-                        	'query_var' => 'rating',
-                        	'rewrite' => true, array('slug'=>'rating', 'with_front'=>false, 'hierarchical'=>true) ) );
-    }
-}
-
-
-add_filter('post_link', 'rating_permalink');
-add_filter('post_type_link', 'rating_permalink');
- 
-function rating_permalink($permalink, $post_id, $leavename) {
-    if (strpos($permalink, '%rating%') === false) return $permalink;
-     
-        // Get post
-        $post = get_post($post_id);
-        if (!$post) return $permalink;
- 
-        // Get taxonomy terms
-        $terms = wp_get_object_terms($post->ID, 'rating');   
-        if (!is_wp_error($terms) && !empty($terms) && is_object($terms[0])) 
-        	$taxonomy_slug = $terms[0]->slug;
-        else 
-        	$taxonomy_slug = 'not-rated';
- 
-    return str_replace('%rating%', $taxonomy_slug, $permalink);
-
-}    
-
-
-
-
-
-
-
-
-/* * * * * * * * */
-
 
 
 function custom_icon() {
@@ -847,6 +805,9 @@ function custom_icon() {
 }
 
 add_action('admin_enqueue_scripts', 'custom_icon', 1);
+
+
+
 
 //hook into the init action and call create taxonomies when it fires
 add_action( 'init', 'create_taxonomies', 0 );
@@ -878,6 +839,8 @@ function create_taxonomies()
 	'rewrite' => array( 'slug' => 'Sony Playstation Categories' ),
   ));
 
+
+
   // Add new taxonomy, make it hierarchical (like categories) -- XBOX
   $xboxlabels = array(
 	'name' => _x( 'XBox Categories', 'taxonomy general name', 'framework'),
@@ -893,15 +856,49 @@ function create_taxonomies()
 	'menu_name' => __( 'Categories', 'framework'),
   ); 	
 
-  // taxonomy name = custom post type + '-categories'
-  register_taxonomy('xbox-categories',array('xbox'), array(
-	'hierarchical' => true,
-	'labels' => $xboxlabels,
-	'show_ui' => true,
-	'query_var' => true,
-	'rewrite' => array( 'slug' => 'XBox Categories' ),
-  ));
+	register_taxonomy( 'xbox-categories', 'xbox', array(
+		'hierarchical' => true, 
+		'labels' => $xboxlabels, 
+		'public' => true, 
+		'show_ui' => true,
+		'query_var' => 'xbox-categories',
+		'rewrite' => true, array('slug'=>'Xbox Categories', 
+			  'with_front'=> false, 
+			  'hierarchical'=> true) 
+		) 
+	);
+
 }
+
+
+
+
+add_filter('post_link', 'xbox_permalink');
+add_filter('post_type_link', 'xbox_permalink');
+ 	
+function xbox_permalink($permalink, $post_id, $leavename) {
+    if (strpos($permalink, '%xbox-categories%') === false) return $permalink;
+     
+        // Get post
+        $post = get_post($post_id);
+        if (!$post) return $permalink;
+ 
+        // Get taxonomy terms
+        $terms = wp_get_object_terms($post->ID, 'xbox-categories');   
+        if (!is_wp_error($terms) && !empty($terms) && is_object($terms[0])) 
+        	$taxonomy_slug = $terms[0]->slug;
+        else 
+        	$taxonomy_slug = 'general';
+ 
+    return str_replace('%xbox-categories%', $taxonomy_slug, $permalink);
+
+}    
+
+
+
+
+
+
 
 /*-----------------------------------------------------------------------------------*/
 /*	Load Text Domain
