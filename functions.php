@@ -871,10 +871,9 @@ function create_taxonomies()
 }
 
 
+add_filter('post_link', 'xbox_permalink',10, 3);
+add_filter('post_type_link', 'xbox_permalink', 10, 3);
 
-
-add_filter('post_link', 'xbox_permalink');
-add_filter('post_type_link', 'xbox_permalink');
  	
 function xbox_permalink($permalink, $post_id, $leavename) {
     if (strpos($permalink, '%xbox-categories%') === false) return $permalink;
@@ -893,9 +892,6 @@ function xbox_permalink($permalink, $post_id, $leavename) {
     return str_replace('%xbox-categories%', $taxonomy_slug, $permalink);
 
 }    
-
-
-
 
 
 
