@@ -832,7 +832,7 @@ function create_taxonomies()
 
   // taxonomy name = custom post type + '-categories'
   register_taxonomy('sony-playstation-categories',array('sony-playstation'), array(
-	'hierarchical' => false,
+	'hierarchical' => true,
 	'labels' => $sonylabels,
 	'show_ui' => true,
 	'query_var' => true,
