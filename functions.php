@@ -709,9 +709,9 @@ function create_post_types() {
 
 // add rewrite rules to get categories on the url
 global $wp_rewrite;
-$xbox_structure = '/xbox/%xbox-categories%/%postname%';
+$xbox_structure = '/xbox/%xbox-categories%/%xbox%';
 $wp_rewrite->add_rewrite_tag("%xbox-categories%", '([^/]+)', "xbox-categories=");
-$wp_rewrite->add_permastruct('xbox', $xbox_structure, true);
+$wp_rewrite->add_permastruct('xbox', $xbox_structure, false);
 
 
 $terms = get_the_terms($post_ID, $taxonomy);
@@ -736,7 +736,6 @@ $terms = get_the_terms($post_ID, $taxonomy);
 
 			'hierarchical' => true,
 			'rewrite'=> false, array(
-            		//'slug' => '/%rating%',
             		'with_front' => false
         	   ),
 			'menu_icon' => get_stylesheet_directory_uri() . '/admin/images/playstation.png',
@@ -774,8 +773,6 @@ $terms = get_the_terms($post_ID, $taxonomy);
 
 		    'hierarchical' => true,
 			'rewrite' => false, array(
-					    //'slug' => 'event',
-					    //'slug' => '%xbox-categories%',
 					    'with_front' => true
 					),
 			'menu_icon' => get_stylesheet_directory_uri() . '/admin/images/xbox.png',
@@ -889,7 +886,9 @@ function xbox_permalink($permalink, $post_id, $leavename) {
         else 
         	$taxonomy_slug = 'general';
  
+    // replace where '%xbox-categories%' is found with $taxonomy_slug in the $permalink string
     return str_replace('%xbox-categories%', $taxonomy_slug, $permalink);
+
 
 }    
 
