@@ -37,9 +37,9 @@ html, body{
     background: rgba(255, 255, 255, 0.6);
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    border: 1px solid #fff;
-    -webkit-box-shadow: 0px 2px 1px 0px #999;
-    box-shadow: 0px 2px 1px 0px #999;
+    border: 1px solid #333;
+    -webkit-box-shadow: 0px 2px 1px 0px #000;
+    box-shadow: 2px 2px 22px 0px #000;
 }
 
 .login label{
