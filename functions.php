@@ -707,14 +707,21 @@ add_action( 'init', 'create_post_types' );
 
 function create_post_types() {
 
-// add rewrite rules to get categories on the url
-global $wp_rewrite;
-$xbox_structure = '/xbox/%xbox-categories%/%xbox%';
-$wp_rewrite->add_rewrite_tag("%xbox%", '([^/]+)', "xbox=");
-$wp_rewrite->add_permastruct('xbox', $xbox_structure, false);
+	// add rewrite rules to get categories on the url
+	global $wp_rewrite;
 
 
-$terms = get_the_terms($post_ID, $taxonomy);
+	$sony_playstation_structure = '/sony-playstation/%sony-playstation-categories%/%sony-playstation%';
+	$wp_rewrite->add_rewrite_tag("%sony-playstation%", '([^/]+)', "sony-playstation=");
+	$wp_rewrite->add_permastruct('sony-playstation', $sony_playstation_structure, false);
+
+	$xbox_structure = '/xbox/%xbox-categories%/%xbox%';
+	$wp_rewrite->add_rewrite_tag("%xbox%", '([^/]+)', "xbox=");
+	$wp_rewrite->add_permastruct('xbox', $xbox_structure, false);
+
+
+
+	$terms = get_the_terms($post_ID, $taxonomy);
 
 	register_post_type( 'sony-playstation',
 		array(
@@ -804,8 +811,6 @@ function custom_icon() {
 add_action('admin_enqueue_scripts', 'custom_icon', 1);
 
 
-
-
 //hook into the init action and call create taxonomies when it fires
 add_action( 'init', 'create_taxonomies', 0 );
 
@@ -829,12 +834,15 @@ function create_taxonomies()
 
   // taxonomy name = custom post type + '-categories'
   register_taxonomy('sony-playstation-categories',array('sony-playstation'), array(
-	'hierarchical' => true,
-	'labels' => $sonylabels,
-	'show_ui' => true,
-	'query_var' => true,
-	'rewrite' => array( 'slug' => 'Sony Playstation Categories' ),
-  ));
+		'hierarchical' => true,
+		'labels' => $sonylabels,
+		'show_ui' => true,
+		'query_var' => 'sony-playstation-categories',
+		'rewrite' => true, array('slug' => 'Sony Playstation Categories',
+			'with_front' => false,
+			'hierarchical' => true)
+	  	)
+  	);
 
 
 
@@ -868,10 +876,30 @@ function create_taxonomies()
 }
 
 
+add_filter('post_link', 'sony_playstation_permalink',10, 3);
+add_filter('post_type_link', 'sony_playstation_permalink', 10, 3);
+
 add_filter('post_link', 'xbox_permalink',10, 3);
 add_filter('post_type_link', 'xbox_permalink', 10, 3);
 
  	
+function sony_playstation_permalink($permalink, $post_id, $leavename) {
+    if (strpos($permalink, '%sony-playstation-categories%') === false) return $permalink;
+     
+        // Get post
+        $post = get_post($post_id);
+        if (!$post) return $permalink;
+ 
+        // Get taxonomy terms
+        $terms = wp_get_object_terms($post->ID, 'sony-playstation-categories');   
+        if (!is_wp_error($terms) && !empty($terms) && is_object($terms[0])) 
+        	$taxonomy_slug = $terms[0]->slug;
+        else 
+        	$taxonomy_slug = 'general';
+ 
+    return str_replace('%sony-playstation-categories%', $taxonomy_slug, $permalink);
+}    
+
 function xbox_permalink($permalink, $post_id, $leavename) {
     if (strpos($permalink, '%xbox-categories%') === false) return $permalink;
      
@@ -888,8 +916,6 @@ function xbox_permalink($permalink, $post_id, $leavename) {
  
     // replace where '%xbox-categories%' is found with $taxonomy_slug in the $permalink string
     return str_replace('%xbox-categories%', $taxonomy_slug, $permalink);
-
-
 }    
 
 

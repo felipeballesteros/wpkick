@@ -168,6 +168,7 @@ body {
 /* Stylistic Cushioning to Bottom of Page */	
 .sidebar, .smallpage, .largepage {
 	margin-bottom: 20px;
+	box-shadow: 1px 1px 11px 0px #222;
 }
 
 /* #Logo Styles
