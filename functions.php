@@ -710,7 +710,7 @@ function create_post_types() {
 // add rewrite rules to get categories on the url
 global $wp_rewrite;
 $xbox_structure = '/xbox/%xbox-categories%/%xbox%';
-$wp_rewrite->add_rewrite_tag("%xbox-categories%", '([^/]+)', "xbox-categories=");
+$wp_rewrite->add_rewrite_tag("%xbox%", '([^/]+)', "xbox=");
 $wp_rewrite->add_permastruct('xbox', $xbox_structure, false);
 
 
