@@ -137,35 +137,37 @@ else :  ?>
 
 <!-- Page Content
   ================================================== -->
+<div class="projectcontent">
+	
+	<div class="namecontainer container singleproject">
+	 	<div class="pagename">
+	    	<h2><span> <?php the_title(); ?></span></h2>
+	    </div>
+	</div>
 
-<div class="namecontainer container singleproject">
- 	<div class="pagename">
-    	<h2><span> <?php the_title(); ?></span></h2>
-    </div>
-</div>
+	<div class="container clearfix ">
+	    <div class="smallpage">
+	        <?php $content = get_the_content(); if($content  != '') : // if there is content ?>
+	        <div class="content pagebg">
+	            <div class="contentwrap">
+	                <?php the_content(); ?>
+	                <div class="clear"></div>
+	                <?php edit_post_link('Edit this entry.', '<p>', '</p>'); ?>
+	                
+	             	 <?php show_social_icons(get_permalink(),get_the_title()); ?>
+	                
+	                <div class="clear"></div>
+	            </div>
+	            <div class="clear"></div>
+	        </div>
+	        <div class="clear"></div>
+	        <?php endif; ?>
+	        <?php comments_template('', true);?>
+	    </div>
 
-<div class="container clearfix ">
-    <div class="smallpage">
-        <?php $content = get_the_content(); if($content  != '') : // if there is content ?>
-        <div class="content pagebg">
-            <div class="contentwrap">
-                <?php the_content(); ?>
-                <div class="clear"></div>
-                <?php edit_post_link('Edit this entry.', '<p>', '</p>'); ?>
-                
-             	 <?php show_social_icons(get_permalink(),get_the_title()); ?>
-                
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-        </div>
-        <div class="clear"></div>
-        <?php endif; ?>
-        <?php comments_template('', true);?>
-    </div>
-
-    <div class="sidebar">
-    	<?php	/* Widget Area */	if ( !function_exists( 'dynamic_sidebar' ) || !dynamic_sidebar('Contact Sidebar') ) ?>
+	    <div class="sidebar">
+	    	<?php	/* Widget Area */	if ( !function_exists( 'dynamic_sidebar' ) || !dynamic_sidebar('Contact Sidebar') ) ?>
+		</div>
 	</div>
 </div>
 

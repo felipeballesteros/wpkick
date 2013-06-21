@@ -153,10 +153,18 @@ body {
 	overflow-x: hidden;
 	z-index: 999999;
 }
-.smallpage, .projectcontent {
+
+.projectcontent {
+	width: 730px;
+	float: left;
+}
+
+.smallpage {
 	width: 465px;
 	float: left;
 }
+
+
 .largepage {
 	width: 685px;
 }
@@ -3203,9 +3211,7 @@ ul#thumb-list li:hover {
 	width: 465px;
 	margin-right: 0;
 }
-.sidebar, .smallpage, .largepage {
-	margin-bottom: 0;
-}
+
 .divider.full, .smallpage .divider.full, .sidebar .divider.full  {
 	width: 445px;
 }
@@ -3299,10 +3305,10 @@ a.pp_close {
 .navhandle {
 	display: none;
 }
-
-
-
-
+.sidebar, .smallpage, .largepage {
+	margin-bottom: 0;
+	box-shadow:none;
+}
 
 
 /* Mobile Layout
@@ -3780,6 +3786,9 @@ width: 365px;
 line-height: 25px;
 font-size: 25px;
 }
+
+
+
 }
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */

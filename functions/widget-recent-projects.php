@@ -57,7 +57,7 @@ class ag_recentprojects_widget extends WP_Widget {
 if ( $title ) echo ' 
             <h3>'.$title.'</h3>'
 ?>
-  <?php $loop = new WP_Query( array( 'post_type' => 'portfolio', 'posts_per_page' => $postnum ) ); ?>
+  <?php $loop = new WP_Query( array( 'post_type' => 'sony-playstation', 'posts_per_page' => $postnum ) ); ?>
 	 <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
      
 <div class="recent-project">
