@@ -405,23 +405,26 @@ if ( function_exists( 'add_theme_support' ) ) {
 
 
 if (class_exists('MultiPostThumbnails')) { 
-if ( $thumbnum = of_get_option('of_thumbnail_number') ) { $thumbnum = ($thumbnum + 1); } else { $thumbnum = 7;}
-   $counter1 = 2;
+	if ( $thumbnum = of_get_option('of_thumbnail_number') ) { $thumbnum = ($thumbnum + 1); } else { $thumbnum = 7;}
+	   
+	   $counter1 = 2;
+	   
 
-	while ($counter1 < ($thumbnum)) {	
-		new MultiPostThumbnails( 
-			array( 
-				'label' => 'Slide ' . $counter1, 
-				'id' => $counter1 . '-slide', 
-				'post_type' => 'sony-playstation',
-			)); 
+		while ($counter1 < ($thumbnum)) {	
 
-		new MultiPostThumbnails( 
-			array( 
-				'label' => 'Slide ' . $counter1, 
-				'id' => $counter1 . '-slide', 
-				'post_type' => 'xbox',
-			)); 
+			if (class_exists('MultiPostThumbnails')) {
+
+	        	$types = array('sony-playstation', 'xbox');
+	        	
+	        		foreach($types as $type) {
+	        		new MultiPostThumbnails(array(
+	                    'label' => 'Slide ' . $counter1,
+	                    'id' => $counter1 . '-slide',
+	                    'post_type' => $type
+	                )
+	            );
+	        }
+	    }
 
 		$counter1++;
 	}
