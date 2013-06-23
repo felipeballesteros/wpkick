@@ -840,7 +840,7 @@ $(window).load(function(){
 		progress_delay		:	false,				// Delay after resize before resuming slideshow
 		thumb_page 			: 	false,				// Thumbnail page
 		thumb_interval 		: 	false,				// Thumbnail interval
-		image_path			:	'http://localhost/normous/wp-content/themes/BigFormat/images/',				// Default image path
+		image_path			:	'http://expressionincode.com/wordpress/wp-content/themes/wpkick/images/',				// Default image path
 													
 		// General Elements							
 		play_button			:	'.linesmobile, #pauseplay',		// Play/Pause button
@@ -942,7 +942,7 @@ jQuery('#portfoliocontainer').infinitescroll({
     itemSelector : '.portfoliothumb',     // selector for all items you'll retrieve
     loading: {
         finishedMsg: 'You have reached the end!',
-        img: 'http://localhost/normous/wp-content/themes/BigFormat/images/loading.gif',
+        img: 'http://expressionincode.com/wordpress/wp-content/themes/wpkick/images/loading.gif',
         msgText: 'Loading More Projects...'
       }
     },
@@ -1147,3 +1147,8 @@ if (!(navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 5_\d/i)))
   jQuery('.iphone #navscroll, .iphone #supersized li a, .iphone .lines').stop().animate({top : $topscroll}, 500);
 };
 }
+ 
+			  jQuery(document).ready(function ($) { 
+				jQuery('.toggleproject').trigger("toggleProject");
+			  }); 
+		
