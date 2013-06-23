@@ -635,17 +635,17 @@ ul#mobilenav ul {
 }
 
 ul#mobilenav {
-  margin: 0;
-  position: relative;
-  z-index: 1000;
+  margin: 0;
+  position: relative;
+  z-index: 1000;
 }
 
 #mobilenav a {
 	position:relative;
 	display:block;
-  	overflow: hidden;
-  	height: 0;
-  	line-height: 0;
+  	overflow: hidden;
+  	height: 0;
+  	line-height: 0;
 	padding: 5px 5px;
 	border-bottom: 1px dotted gainsboro;
 	text-align: left;
@@ -687,17 +687,17 @@ ul#mobilenav {
 }
 
 #mobilenav {
-  /* the nav sits behind the menu button */
-  z-index: 1000;
+  /* the nav sits behind the menu button */
+  z-index: 1000;
 }
 #mobilenav:target {
-  /* unless it&rsquo;s showing */
-  z-index: 1001;
+  /* unless it&rsquo;s showing */
+  z-index: 1001;
 }
 #mobilenav:target a {
-   /* make nav links sit up a level */
-  position: relative;
-  z-index: 1;
+   /* make nav links sit up a level */
+  position: relative;
+  z-index: 1;
 }
 #back {
 	position:relative;	
@@ -1560,7 +1560,7 @@ ul.filter li:first-child {
 	margin-bottom: 4px;
 	text-align:center;
 	margin-top:10px;
-	font-size:14px;
+	font-size: 14px;
 }
 .blogpost.portfolio p, .blogpost.portfolio p a {
 	color:#777;
@@ -1574,12 +1574,13 @@ ul.filter li:first-child {
 	display: block;
 }
 .portfoliothumb {
-	width: 222px;
+	width: 242px;
 	float: left;
-	background:#fff; 
-	padding:10px; 
+	background: #fff; 
+	padding: 1px; 
 	margin-bottom:10px; 
 	margin-right:10px;
+	border-box: 10px 10px 10px black;
 }
 .portfolioitem {
 	position: relative;
@@ -3649,7 +3650,8 @@ body.home {
 }
 .portfoliothumb {
 	margin-right: 0;
-	width: 300px;
+	width: 317px;
+	magin-bottom: 30px;
 }
 .top {
 	display: none !important;
@@ -3765,7 +3767,7 @@ select.dropdownmenu {
 }
 .portfoliothumb {
 	margin-right: 10px;
-	width: 215px;
+	width: 233px;
 }
 .namecontainer.full {
 	width: 400px;
