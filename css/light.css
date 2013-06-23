@@ -18,7 +18,7 @@ hr, .recent-project, .blogpost, .content, ul.tabs li a, ul.tabs, .pagination_con
 	border-color:#f2f2f2;	
 }
 h1, h2, h3, h4, h5, .logo h1, .logo h1 a, h1, h2, h1 a, h2 a, h3, .ag_projects_widget h3, h4, h3 a, h4 a, .blogpost h2 a {
-	color:#222;
+	color: #333;
 }
 .singlecomment {
 	background:#fff;
