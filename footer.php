@@ -1,5 +1,5 @@
 
-<!-- Close Mainbody and start footer whatevs
+<!-- Close Mainbody and start footer whatever
   ================================================== -->
 
 <!-- Theme Hook -->
