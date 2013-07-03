@@ -113,14 +113,14 @@ font-style:normal;font-family:"PT Sans Narrow", arial, sans-serif;letter-spacing
 
 h1, h1 a,
 h2, h2 a {
-font-style:normal;text-transform:uppercase;letter-spacing: 1px;font-family:"Helvetica", arial, sans-serif;line-height: 100%;} 
+font-weight: bold;text-transform:uppercase;letter-spacing: 1px;font-family:"PT Sans Narrow", arial, sans-serif;line-height: 100%;} 
 
 /* #Secondary Heading Option
 ======================================================*/
 h3, h3 a,
 h4, h4 a,
 h5, h5 a {
-font-weight: bold;text-transform:uppercase;letter-spacing: 1px;font-family:"Droid Sans", arial, sans-serif;line-height: 100%;} 
+font-weight: bold;text-transform:none;font-family:"Droid Sans", arial, sans-serif;line-height: 100%;} 
 
 /* #Tiny Details Font
 ======================================================*/

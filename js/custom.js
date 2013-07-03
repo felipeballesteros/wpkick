@@ -240,7 +240,7 @@ jQuery(function($) {
 jQuery('.projectslideshow').wmuSlider({
     animation: 'fade',
 	animationDuration: 600,
-	slideshow: true, 
+	slideshow: false, 
 	slideshowSpeed: 7000,
 	slideToStart: 0,
 	navigationControl: true,

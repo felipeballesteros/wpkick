@@ -1,5 +1,6 @@
 
-<!-- Close Mainbody and start footer testing again
+
+<!-- Close Mainbody and start footer testing
   ================================================== -->
 
 <!-- Theme Hook -->
@@ -10,3 +11,4 @@
   <?php echo of_get_option('of_google_analytics'); ?>
 </body>
 </html>
+
