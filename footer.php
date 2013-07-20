@@ -1,5 +1,5 @@
 
-<!-- Close Mainbody and start footer -test5
+<!-- Close Mainbody and start footer -test
   ================================================== -->
 
 <!-- Theme Hook -->
