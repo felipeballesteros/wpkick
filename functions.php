@@ -409,34 +409,34 @@ if (class_exists('MultiPostThumbnails')) {
 	   
 	   $counter1 = 2;
 	   
+	   	$types = array('sony-playstation', 'xbox');
 
 		while ($counter1 < ($thumbnum)) {	
 
 			if (class_exists('MultiPostThumbnails')) {
-
-	        	$types = array('sony-playstation', 'xbox');
 	        	
-	        		foreach($types as $type) {
-	        		new MultiPostThumbnails(array(
-	                    'label' => 'Slide ' . $counter1,
-	                    'id' => $counter1 . '-slide',
-	                    'post_type' => $type
-	                )
-	            );
-	        }
-	    }
+	        	foreach($types as $type) {
+	        		new MultiPostThumbnails( array (
+		                    'label' => 'Slide ' . $counter1,
+		                    'id' => $counter1 . '-slide',
+		                    'post_type' => $type
+		                )
+	           		);
+		        }
 
-		$counter1++;
+	        $counter1++;
+	    }
+		
 	}
 }
 
 
-function get_portfolio_info ($id, $thumbnum) {
+function get_portfolio_info ($category, $id, $thumbnum) {
 	
 		global $thumb, $full, $alt, $thumbnc, $fitalways, $fitlandscape, $fitportrait;
 		
 		$i = 2;
-		
+
 		while ($i < ($thumbnum)) {
 		
 		global ${"thumb" . $i};
@@ -447,9 +447,9 @@ function get_portfolio_info ($id, $thumbnum) {
 		$i++;
 		
 		}	
-			  $fitalways = 0; $fitlandscape = 0; $fitportrait = 0;
+			$fitalways = 0; $fitlandscape = 0; $fitportrait = 0;
 			  
-			  $fitting = get_post_meta($id, 'ag_fit', true); //Get the fitting setting for slideshow
+			$fitting = get_post_meta($id, 'ag_fit', true); //Get the fitting setting for slideshow
 				
 				switch ($fitting) {
 					case 'Fit Portrait':
@@ -476,14 +476,14 @@ function get_portfolio_info ($id, $thumbnum) {
 
 			while ($counter < ($thumbnum)) {
 				
-				 ${"full" . $counter} = MultiPostThumbnails::get_post_thumbnail_id('portfolio', $counter . '-slide', $id); // Get Image ID
-				 ${"alt" . $counter} = get_post_meta(${"full" . $counter} , '_wp_attachment_image_alt', true); // Alt text of image			 
-				 ${"full" . $counter} = wp_get_attachment_image_src(${"full" . $counter}, 'portfoliolarge', false); // URL of Second Slide Full Image 
-				 ${"thumbid" . $counter} = MultiPostThumbnails::get_post_thumbnail_id('portfolio',  $counter . '-slide', $id); 
-				 ${"thumb" . $counter} = wp_get_attachment_image_src(${"thumbid" . $counter}, 'portfoliosmall', false); // URL of next Slide 
-				 ${"thumbnc" . $counter} = wp_get_attachment_image_src(${"thumbid" . $counter}, 'portfoliosmallnc', false); // URL of next Slide 
+				${"full" . $counter} = MultiPostThumbnails::get_post_thumbnail_id($category, $counter . '-slide', $id); // Get Image ID
+				${"alt" . $counter} = get_post_meta(${"full" . $counter} , '_wp_attachment_image_alt', true); // Alt text of image			 
+				${"full" . $counter} = wp_get_attachment_image_src(${"full" . $counter}, 'portfoliolarge', false); // URL of Second Slide Full Image 
+				${"thumbid" . $counter} = MultiPostThumbnails::get_post_thumbnail_id($category,  $counter . '-slide', $id); 
+				${"thumb" . $counter} = wp_get_attachment_image_src(${"thumbid" . $counter}, 'portfoliosmall', false); // URL of next Slide 
+				${"thumbnc" . $counter} = wp_get_attachment_image_src(${"thumbid" . $counter}, 'portfoliosmallnc', false); // URL of next Slide 
 		
-			 $counter++;
+				$counter++;
 		}
 	}
 

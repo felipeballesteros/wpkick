@@ -57,7 +57,7 @@ else :  ?>
 					vertical_center         :   1,			// Vertically center background
 					horizontal_center       :   1,			// Horizontally center background
 					<?php  if (have_posts()) : while (have_posts()) : the_post();
-							get_portfolio_info ($post->ID, $thumbnum);
+							get_portfolio_info ('xbox', $post->ID, $thumbnum);
 							endwhile; endif; ?>
 					fit_always				:	<?php echo $fitalways; ?>,			// Image will never exceed browser width or height (Ignores min. dimensions)
 					fit_portrait         	:   <?php echo $fitportrait; ?>,			// Portrait images will not exceed browser height
@@ -119,7 +119,7 @@ else :  ?>
 
 <!-- Mobile and SEO Friendly Images
   ================================================== -->
-<div class="wmuSlider <?php if( MultiPostThumbnails::get_the_post_thumbnail('portfolio', '2-slide', NULL,  'portfoliosmallnc') != '' ) { echo 'projectslideshow'; }?>">
+<div class="wmuSlider <?php if( MultiPostThumbnails::get_the_post_thumbnail('xbox', '2-slide', NULL,  'portfoliosmallnc') != '' ) { echo 'projectslideshow'; }?>">
     <div class="wmuSliderWrapper">
         <span><img src="<?php  echo $thumb[0]; ?>" alt="<?php if ($alt) { echo str_replace('"', "", $alt); } else { echo the_title(); } ?>" title="<?php if ($alt) { echo str_replace('"', "", $alt); } else { echo the_title(); } ?>" class="scale-with-grid"/></span>
         
