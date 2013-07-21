@@ -1,0 +1,6 @@
+# ignore specific mac files
+.DS_Store
+
+# ignore files that start with these
+*~
+*.swp
