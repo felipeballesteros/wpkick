@@ -409,6 +409,7 @@ if (class_exists('MultiPostThumbnails')) {
 	   
 	   $counter1 = 2;
 	   
+	   	// add every category here
 	   	$types = array('sony-playstation', 'xbox');
 
 		while ($counter1 < ($thumbnum)) {	
