@@ -196,7 +196,9 @@ else : ?>
 <?php endif;?>
 
 
-<?php if(is_front_page() || is_singular('sony-playstation')) : ?>
+<?php if(is_front_page() || 
+         is_singular('sony-playstation') ||  
+         is_singular('xbox')) : ?>
 	<?php 
 	/* #If there's no Video URL
 	======================================================*/
