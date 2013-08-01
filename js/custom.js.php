@@ -1149,7 +1149,7 @@ jQuery(document).ready(function() {
 /* # Detect if iOS5
 ======================================================*/
 
-if (!(navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 5_\d/i)))
+if ((navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 4_\d/i)))
 { 
   window.onscroll = function() {
   $topscroll = window.pageYOffset;
