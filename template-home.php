@@ -51,7 +51,7 @@ Template Name: Homepage
 					slides 					:  	[			// Slideshow Images
 												 
 				<?php 
-				global $ag_loopcounter; $ag_loopcounter = 0;
+				global $ag_loopcounter; $ag_loopcounter = 0; $images = '';
 				
 					   $loop = new WP_Query( array( 'post_type' => 'sony-playstation', 'posts_per_page'=>-1) ); 
 						while ( $loop->have_posts() ) : $loop->the_post(); // Start the Loop
@@ -62,11 +62,47 @@ Template Name: Homepage
 
 							/* #Display Post Featured Image and Captions
 							======================================================*/								 
-							 if ($home_display == 'Yes' && has_post_thumbnail()) { ?>
-								 {image : '<?php  echo $full[0]; ?>', title : '<div class="<?php if($title_place) { echo $title_place; } else {  echo 'Center'; } ?> <?php if($title_color) { echo $title_color; } else {  echo 'White'; } ?> <?php if($title_bg) { echo $title_bg; } ?> caption" id="project-<?php the_ID(); ?>"><?php if ($sub_title !== '') { echo '<div class="subheadline"><span>' . $sub_title .'</span></div>';} ?><?php if ($title !== '') { echo '<div class="bgwrap"><h2><strong>' . $title .'</strong></h2></div>';} ?><?php if($more_button) { if($optional_link) { echo '<div class="captionbutton"><a href="'.$optional_link.'" class="button">'.htmlspecialchars($more_button, ENT_QUOTES).'</a></div>'; } else {  echo '<div class="captionbutton"><a href="'.$post_url.'" class="button">'.htmlspecialchars($more_button, ENT_QUOTES).'</a></div>'; } } ?></div><div class="clear"></div>', thumb : '<?php  echo $thumb[0]; ?>', url : '<?php echo $post_url; ?>'} <?php if( ($loop->current_post + 1) < ($loop->post_count) ) { echo(","); } 
-							 } 
+							if ($home_display == 'Yes' && has_post_thumbnail()) { 
+							 
+								 // Full Size Image						 
+							 	 $images .= "{image : '". $full[0] ."', title : '";
 								 
+								 $images .= '<div class="';
+								 
+								 // Set title placement
+								 if($title_place) { $images .= $title_place . ' '; } else { $images .= 'Center '; }
+								 
+								 // Set title color
+								 if($title_color) { $images .= $title_color . ' '; } else {  $images .= 'White '; }
+								 
+								 // Set title background
+								 if($title_bg) { $images .= $title_bg . ' '; }
+								 
+								 // Set project id
+								 $images .=  'caption" id="project-' . get_the_ID() . '">';
+								 
+								 // Set subtitle
+								 if ($sub_title !== '') { $images .= '<div class="subheadline"><span>' . $sub_title .'</span></div>';} 
+								 
+								 // Set title
+								 if ($title !== '') { $images .= '<div class="bgwrap"><h2><strong>' . $title . '</strong></h2></div>';} 
+								 
+								 // Set more button
+								 if($more_button) { if($optional_link) { $images .= '<div class="captionbutton"><a href="'.$optional_link.'" class="button">'.htmlspecialchars($more_button, ENT_QUOTES).'</a></div>'; } else {  $images .= '<div class="captionbutton"><a href="'.$post_url.'" class="button">'.htmlspecialchars($more_button, ENT_QUOTES).'</a></div>'; } } 
+								
+								 // Clear 
+								 $images .= '</div><div class="clear"></div>';
+								 
+								 // Set thumbnail and URL
+								 $images .= "', thumb : '" . $thumb[0] . "', url : '" . $post_url . "'},"; 
+
+							}
+		 
 						endwhile; // End the Loop ?>
+
+						<?php $images = rtrim($images, ','); 
+						 echo $images;
+						 ?>
 						 
 						 ],
 												

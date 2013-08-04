@@ -202,14 +202,14 @@ function mytheme_show_video_box() {
  
 	echo '<table class="form-table">';
 	
-	echo "<script>
-	jQuery('.nohide').click( function() {
-					jQuery('.hidden').css('display', 'table-row');
-									  });
-		jQuery('.hide').click( function() {
-					jQuery('.hidden').css('display', 'none');
-									  });
-	</script>";
+	// echo "<script>
+	// jQuery('.nohide').click( function() {
+	// 				jQuery('.hidden').css('display', 'table-row');
+	// 								  });
+	// 	jQuery('.hide').click( function() {
+	// 				jQuery('.hidden').css('display', 'none');
+	// 								  });
+	// </script>";
  
 	foreach ($meta_box_video['fields'] as $field) {
 		// get current post meta data
@@ -339,14 +339,14 @@ function mytheme_show_videohome_box() {
  
 	echo '<table class="form-table">';
 	
-	echo "<script>
-	jQuery('.nohide').click( function() {
-					jQuery('.hidden').css('display', 'table-row');
-									  });
-		jQuery('.hide').click( function() {
-					jQuery('.hidden').css('display', 'none');
-									  });
-	</script>";
+	// echo "<script>
+	// jQuery('.nohide').click( function() {
+	// 				jQuery('.hidden').css('display', 'table-row');
+	// 								  });
+	// 	jQuery('.hide').click( function() {
+	// 				jQuery('.hidden').css('display', 'none');
+	// 								  });
+	// </script>";
  
 	foreach ($meta_box_video_home['fields'] as $field) {
 		// get current post meta data

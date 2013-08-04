@@ -2,15 +2,15 @@
 jQuery(window).load(function(){ 
 								
 	if (jQuery('.nohide').is(':checked') ) {
-		jQuery('.hidden').show();
+		jQuery('.postbox .hidden').show();
 	}
 
-	jQuery('.nohide').click(function() {
-		jQuery('.hidden').show();
+	jQuery('.nohide').click( function() {
+		jQuery('.postbox .hidden').css('display', 'table-row');
 	});
-	
-	jQuery('.hide').click(function() {
-		jQuery('.hidden').hide();
+		
+	jQuery('.hide').click( function() {
+		jQuery('.postbox .hidden').css('display', 'none');
 	});
 	
 

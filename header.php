@@ -48,13 +48,42 @@ $browser = $_SERVER['HTTP_USER_AGENT'];
 <!-- Embed Google Web Fonts Via API -->
 <script type="text/javascript">
       WebFontConfig = {
-        google: { families: [ '<?php if ( $slide_header = of_get_option('of_slide_header') ) { echo $slide_header['face']; } else { echo 'PT Sans Narrow';} ?>',
-							  '<?php if ( $slide_subtitle = of_get_option('of_slide_subtitle') ) { echo $slide_subtitle['face']; } else { echo 'Droid Serif';} ?>',										
-							  '<?php if ( $sf_font = of_get_option('of_sf_font') ) { echo $sf_font['face']; } else { echo 'PT Sans Narrow';} ?>',										
-							  '<?php if ( $h1font = of_get_option('of_heading_font') ) { echo $h1font['face']; } else { echo 'Open Sans'; $h1font = 'Open Sans';} ?>', 
-							  '<?php if ( $h2font = of_get_option('of_heading_font2') ) { echo $h2font['face']; } else { echo 'Open Sans'; $h2font = 'Open Sans';} ?>', 
-							  '<?php if ( $pfont = of_get_option('of_p_font') ) { echo $pfont['face']; } else { echo 'Open Sans'; $pfont = 'Open Sans';} ?>', 
-							  '<?php if ( $tinyfont = of_get_option('of_tiny_font') ) { echo $tinyfont['face']; } else { echo 'Droid Serif'; $navfont = 'Droid Serif';} ?>'] }
+        google: { families: [ 
+            '<?php if ( $slide_header = of_get_option('of_slide_header') ) { 
+                echo (function_exists('ag_is_default')) ? ag_is_default($slide_header['face']) : $slide_header['face'];
+            } else { 
+                echo 'PT Sans Narrow';
+            } ?>',
+            '<?php if ( $slide_subtitle = of_get_option('of_slide_subtitle') ) { 
+                echo (function_exists('ag_is_default')) ? ag_is_default($slide_subtitle['face']) : $slide_subtitle['face']; 
+            } else { 
+                echo 'Droid Serif';
+            } ?>',                                      
+            '<?php if ( $sf_font = of_get_option('of_sf_font') ) { 
+                echo (function_exists('ag_is_default')) ? ag_is_default($sf_font['face']) : $sf_font['face'];
+            } else { 
+                echo 'PT Sans Narrow';
+            } ?>',                                      
+            '<?php if ( $h1font = of_get_option('of_heading_font') ) { 
+                echo (function_exists('ag_is_default')) ? ag_is_default($h1font['face']) : $h1font['face'];
+            } else { 
+                echo 'Open Sans';
+            } ?>', 
+            '<?php if ( $h2font = of_get_option('of_heading_font2') ) { 
+                echo (function_exists('ag_is_default')) ? ag_is_default($h2font['face']) : $h2font['face'];
+            } else { 
+                echo 'Open Sans';
+            } ?>', 
+            '<?php if ( $pfont = of_get_option('of_p_font') ) { 
+                echo (function_exists('ag_is_default')) ? ag_is_default($pfont['face']) : $pfont['face'];
+            } else { 
+                echo 'Open Sans';
+            } ?>', 
+            '<?php if ( $tinyfont = of_get_option('of_tiny_font') ) { 
+                echo (function_exists('ag_is_default')) ? ag_is_default($tinyfont['face']) : $tinyfont['face'];
+            } else { 
+                echo 'Droid Serif'; 
+            } ?>'] }
       };
       (function() {
         var wf = document.createElement('script');
