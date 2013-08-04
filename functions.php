@@ -1792,4 +1792,26 @@ add_action('manage_xbox_posts_custom_column', 'content', 10, 2);
 include("functions/custom-login.php");
 
 
+/*-----------------------------------------------------------------------------------*/
+/* Redirect on attempt of accessing admin pages outside of trusted IPs
+/*-----------------------------------------------------------------------------------*/
+
+add_action('init','protect_admin');
+
+
+function protect_admin(){
+	global $pagenow;
+	$clientIP = $_SERVER['REMOTE_ADDR'];
+
+	$valid = checkValidIP($clientIP);
+	
+	if( 'wp-login.php' == $pagenow && $valid == false ) {
+		get_template_part( 404 );
+		exit();
+	}
+}
+
+include("functions/checkip.php");
+
+
 ?>
