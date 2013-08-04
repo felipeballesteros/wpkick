@@ -14,10 +14,11 @@
 
 ;(function($) {
 
-if (/1\.(0|1|2)\.(0|1|2)/.test($.fn.jquery) || /^1.1/.test($.fn.jquery)) {
-	alert('blockUI requires jQuery v1.2.3 or later!  You are using v' + $.fn.jquery);
-	return;
-}
+// function that detects jQuery version, and creates a popup if not the right one, comment out for now
+// if (/1\.(0|1|2)\.(0|1|2)/.test($.fn.jquery) || /^1.1/.test($.fn.jquery)) {
+// 	alert('blockUI requires jQuery v1.2.3 or later!  You are using v' + $.fn.jquery);
+// 	return;
+// }
 
 $.fn._fadeIn = $.fn.fadeIn;
 
