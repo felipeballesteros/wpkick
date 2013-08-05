@@ -44,7 +44,7 @@ ag_fullscreen_bg($pageimage[0]); // Display Fullscreen Background
                         <div class="blogdate"><!-- Date Circle -->
                             <h3><?php the_time('d'); ?></h3>
                             <p><?php the_time('M'); ?></p>
-                           <div class="clear"></div>
+                            <div class="clear"></div>
                         </div>
                                   
                         <h3 class="blogtitle"><!-- Blog Title -->
@@ -89,13 +89,13 @@ ag_fullscreen_bg($pageimage[0]); // Display Fullscreen Background
             
            <?php $counter++; endwhile; else :?>
             
-        <!-- Else nothing found -->
-        <div class="smallpage pagebg">
-            <div class="contentwrap">
-                <h2> <?php _e('Error 404 - Not found.', 'framework'); ?></h2>
-                <p><?php _e("Sorry, but you are looking for something that isn't here.", 'framework'); ?></p>
+            <!-- Else nothing found -->
+            <div class="pagebg">
+                <div class="contentwrap">
+                    <h2> <?php _e('Error 404 - Not found.', 'framework'); ?></h2>
+                    <p><?php _e("Sorry, but you are looking for something that isn't here.", 'framework'); ?></p>
+                </div>
             </div>
-        </div>
         
         <!--BEGIN .navigation .page-navigation -->
         <?php endif; ?>
