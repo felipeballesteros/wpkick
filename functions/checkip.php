@@ -1,3 +1,4 @@
+
 <?php
 // Check if the IP is in a provided range
 function in_ip_range($ip_one, $ip_two=false){ 
@@ -41,6 +42,3 @@ function checkValidIP( $clientIP){
 return;
 
 ?>
-
-
-
