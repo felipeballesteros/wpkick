@@ -145,7 +145,8 @@ html, body{
 
 .login h1 a {
     background-image: url('.get_bloginfo('stylesheet_directory') . '/images/login-logo.png) !important;
-	width:700px
+    width:700px;
+    background-size: 274px 63px;
 }
 
 .login #nav {

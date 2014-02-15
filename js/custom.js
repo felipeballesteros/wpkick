@@ -240,7 +240,7 @@ jQuery(function($) {
 jQuery('.projectslideshow').wmuSlider({
     animation: 'fade',
 	animationDuration: 600,
-	slideshow: false, 
+	slideshow: true, 
 	slideshowSpeed: 7000,
 	slideToStart: 0,
 	navigationControl: true,
@@ -1141,11 +1141,14 @@ jQuery(document).ready(function() {
 ======================================================*/
 
 if ((navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 4_\d/i)))
-    { 
-      window.onscroll = function() {
-      $topscroll = window.pageYOffset;
-      jQuery('.iphone #navscroll, .iphone #supersized li a, .iphone .lines').stop().animate({top : $topscroll}, 500);
-    };
+{ 
+  window.onscroll = function() {
+  $topscroll = window.pageYOffset;
+  jQuery('.iphone #navscroll, .iphone #supersized li a, .iphone .lines').stop().animate({top : $topscroll}, 500);
+};
 }
-
+ 
+			  jQuery(document).ready(function ($) { 
+				jQuery('.toggleproject').trigger("toggleProject");
+			  }); 
 		

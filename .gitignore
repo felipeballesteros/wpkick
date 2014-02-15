@@ -4,3 +4,4 @@
 # ignore files that start with these
 *~
 *.swp
+functions/checkip.php
