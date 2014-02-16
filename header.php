@@ -142,11 +142,11 @@ else : ?>
 	================================================== -->
 <div class="navcontainer" id="navscroll">
     <div class="logo">
-        <h1> <a href="<?php echo home_url(); ?>" class="fulllogo">
+        <h2> <a href="<?php echo home_url(); ?>" class="fulllogo">
             <?php if ( $logo = of_get_option('of_logo') ) { ?>
             <img src="<?php echo $logo; ?>" alt="<?php bloginfo( 'name' ); ?>" class="scale-with-grid" />
             <?php } else { bloginfo( 'name' );} ?>
-            </a> </h1>
+            </a> </h2>
     </div>
     <div class="navigation">
         <!--Start Navigation-->
