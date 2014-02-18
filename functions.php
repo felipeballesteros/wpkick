@@ -1797,8 +1797,6 @@ include("functions/custom-login.php");
 /*-----------------------------------------------------------------------------------*/
 
 add_action('init','protect_admin');
-
-
 function protect_admin(){
 	global $pagenow;
 	$clientIP = $_SERVER['REMOTE_ADDR'];
@@ -1810,8 +1808,5 @@ function protect_admin(){
 		exit();
 	}
 }
-
 include("functions/checkip.php");
-
-
 ?>
