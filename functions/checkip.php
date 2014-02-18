@@ -1,3 +1,4 @@
+
 <?php
 // Check if the IP is in a provided range
 function in_ip_range($ip_one, $ip_two=false){ 
@@ -25,10 +26,12 @@ function checkValidIP( $clientIP){
     $validIPs = array(
         '127.0.0.1',
 	    in_ip_range('24.212.207.0','24.212.207.255'),
+	    in_ip_range('207.210.32.0','207.210.32.255'),
     );
 
     foreach ($validIPs as $iP){
         if ($clientIP === $iP){
+
             return true;
             exit();
         }
@@ -37,10 +40,5 @@ function checkValidIP( $clientIP){
 }
 
 return;
-
-
-
 ?>
-
-
 
